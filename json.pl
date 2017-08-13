@@ -9,11 +9,11 @@ use Loader;
 my $config = Loader->load();
 my @instances = ();
 
-for(my $i = 0; $i<=$config->{limit}; $i++) {
+foreach my $file (glob qq("raw/$config->{name}/*.html")) {
+#    print  . "\n";
+#    if (! -f 'raw/'.$config->{name}."/".$i.".html") { next; }
 
-    if (! -f 'raw/'.$config->{name}."/".$i.".html") { next; }
-
-    my $q = Query( file => 'raw/'.$config->{name}."/".$i.".html" );
+    my $q = Query( file => $file );
     my @rows = $q->query($config->{rows})->get_elements(); #
 
     foreach my $row (@rows)
@@ -29,3 +29,7 @@ print JSON->new->utf8(0)->encode(
         'instances'=> \@instances
     }
 );
+
+
+
+

@@ -3,7 +3,7 @@ use warnings FATAL => 'all';
 
 package RaConfig;
 
-sub new { return bless {limit=>100000,rows=>'.pharmacyDetailsControl_Div.controlContainer'}, shift; }
+sub new { return bless {limit=>22300,rows=>'.pharmacyDetailsControl_Div.controlContainer'}, shift; }
 
 sub source { # arg index
     return "http://ra.rejestrymedyczne.csioz.gov.pl/_layouts/15/RA/PharmacyDetailsPublic.aspx?id=".$_[1]."&IsDlg=1";

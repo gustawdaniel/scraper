@@ -15,10 +15,15 @@ sub load
         my $config = SpccConfig->new();
         $config->{name} = "spcc";
         return $config;
-    } else {
+    } elsif (scalar @ARGV && $ARGV[0] eq "ra") {
         use RaConfig;
         my $config = RaConfig->new();
         $config->{name} = "ra";
+        return $config;
+    } else {
+        use AllConfig;
+        my $config = AllConfig->new();
+        $config->{name} = "all";
         return $config;
     }
 }
