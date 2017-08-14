@@ -56,8 +56,8 @@ while (1) {
 
         if ($config->invalid($easy->{body},$easy->getinfo( CURLINFO_RESPONSE_CODE )))
         {
-            printf("ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s] %s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s,$easy->{url});
-            printf($log "ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s] %s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,$s,$easy->{url});
+            printf("ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s);
+            printf($log "ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,$s);
             next;
         }
 
@@ -70,7 +70,7 @@ while (1) {
         print $fh ($easy->{body});
         close $fh;
 
-        printf("ID:\t%s - \e[32mSUCCESS %s\e[0m - [e: %s, s: %s] %s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,++$s,$easy->{url});
+        printf("ID:\t%s - \e[32mSUCCESS %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,++$s);
     }
 }
 
