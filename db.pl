@@ -16,7 +16,11 @@ my $dbh = DBI->connect(
     }
 );
 
-$dbh->do("DELETE FROM log");
+if(scalar @ARGV && $ARGV[0] eq "final") {
+    $dbh->do("DELETE FROM log WHERE offers!=0 OR offers IS NULL");
+} else {
+    $dbh->do("DELETE FROM log");
+}
 
 my $sth = $dbh->prepare(<<'SQL');
 INSERT INTO log
@@ -26,7 +30,7 @@ SQL
 
 foreach my $file (glob qq("raw/$config->{name}/*.html")) {
 
-    print $file =~ /(\d+)\.html/, "\n";
+    print $i ," | ", $file =~ /(\d+)\.html/, "\n" if !($i++%1000);
 
     my %object = $config->optimal_select($file);
     $object{'created_at'} = (stat $file)[9];
@@ -45,7 +49,10 @@ foreach my $file (glob qq("raw/$config->{name}/*.html")) {
         $object{'size'}
     ));
 
-    last if(++$i >= 5000);
+    if(scalar @ARGV && $ARGV[0] eq "final") {
+        unlink $file or warn "Could not unlink $file: $!" if ((defined $object{'offers'}) && $object{'offers'} == 0);
+    }
+        #    last if(++$i >= 50);
 }
 
 $sth->finish;

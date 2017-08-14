@@ -4,6 +4,7 @@ use warnings FATAL => 'all';
 #use LWP::Simple;
 use Net::Curl::Easy  qw( :constants );
 use Net::Curl::Multi qw( );
+#use Try::Tiny;
 
 use Loader;
 
@@ -26,13 +27,14 @@ my $running = 0;
 
 my $e = 0;
 my $s = 0;
-my $i = 1;
+my $i = 0;
 mkdir 'raw', 0755;
 mkdir 'raw/'.$config->{name}, 0755;
 
+open(my $log, ">>res/errors.txt") or die "Cannot open file";
 
 while (1) {
-    while ($i<=$config->{limit} && $running < $max_running ) {
+    while ($i<$config->{limit} && $running < $max_running ) {
         my $easy = make_request( $config->source($i) );
         $multi->add_handle( $easy );
         ++$running;
@@ -55,6 +57,7 @@ while (1) {
         if ($config->invalid($easy->{body},$easy->getinfo( CURLINFO_RESPONSE_CODE )))
         {
             printf("ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s] %s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s,$easy->{url});
+            printf($log "ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s] %s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,$s,$easy->{url});
             next;
         }
 
@@ -70,3 +73,5 @@ while (1) {
         printf("ID:\t%s - \e[32mSUCCESS %s\e[0m - [e: %s, s: %s] %s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,++$s,$easy->{url});
     }
 }
+
+close($log);

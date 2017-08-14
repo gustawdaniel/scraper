@@ -3,10 +3,10 @@ use warnings FATAL => 'all';
 
 package AllConfig;
 
-sub new { return bless {limit=>47000000,rows=>'.layout'}, shift; }
+sub new { return bless {start=>25,limit=>10,rows=>'.layout'}, shift; }
 
 sub source { # arg index
-    return "http://allegro.pl/listing/user/listing.php?us_id=".$_[1];
+    return "http://allegro.pl/listing/user/listing.php?us_id=".($_[1]+$_[0]->{start});
 }
 
 sub index {
@@ -14,19 +14,8 @@ sub index {
 }
 
 sub invalid { # arg html
-    return $_[1] =~ /<h2>Nic tu nie ma<\/h2>/ || $_[2] != 200;
+    return $_[1] =~ /<h2>Nic tu nie ma<\/h2>|<h2>Coś poszło nie tak<\h2>/ || $_[2] != 200;
 }
-
-#sub select { # arg query
-#    my $q = $_[1];
-#    my ($name,$offers,$additional) = (($q->query('.user-info')->as_trimmed_text)[0] =~ /Użytkownik (.*) \(((\d+)?(\s+)?\d+) ofert\)\s*(.*)/);
-#
-#    return (
-#        'name'       => $name,
-#        'offers'     => $offers,
-#        'additional' => $additional
-#    )
-#}
 
 sub optimal_select {
 
@@ -39,15 +28,27 @@ sub optimal_select {
     my $additional;
 
     while (<$fh>) {
-        if ($.>=615 || $.<=618) {
+        if ($.>=615 || $.<=640) {
             ($_) = ($_ =~ /<h1 class="user-info">(.*)<\/h1>/);
             if($_) {
                 $_ =~ s/<.*?>//g;
-                ($name,$offers,$additional) = ($_ =~ /Użytkownik (.*)\s+\(((\d+)?(\s)?\d+) ofert.?\)\s*(.*)/);
+                ($name,$offers,$additional) = ($_ =~ /(?:Użytkownik)?(.*)\s+\(((?:\d+)?(?:\s)?\d+) ofert.?\)(.*)/);
+
+                if (!(defined $offers)) {
+                    warn "file: $_[1]";
+                    warn "line: $.";
+                    warn "text: $_";
+                    die;
+                }
+#                warn "text: $_";
+
+                $name =~ s/Użytkownik\s+|^\s+|\s+$//g;
+                $additional =~ s/^\s+|\s+$//g;
                 $offers =~ s/\s+//g;
+
                 last;
             }
-            last if($.>=618);
+            last if($.>=640);
         }
     }
 

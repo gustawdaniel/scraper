@@ -7,8 +7,10 @@ my $config = Loader->load();
 my @instances = ();
 my %object = $config->optimal_select("raw/all/10018.html");
 push @instances,\%object;
-my %object2 = $config->optimal_select("raw/all/10020.html");
+my %object2 = $config->optimal_select("raw/all/1680.html");
 push @instances,\%object2;
+my %object3 = $config->optimal_select("raw/all/216.html");
+push @instances,\%object3;
 
 print JSON->new->utf8(0)->encode(
     {
