@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+mkdir -p res
+
 sqlite3 res/all.db \
 "drop table IF EXISTS log;"
 

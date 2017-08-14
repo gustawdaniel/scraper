@@ -21,7 +21,7 @@ sub make_request {
 
 my $config = Loader->load();
 
-my $max_running = 10;
+my $max_running = 7;
 my $multi = Net::Curl::Multi->new();
 my $running = 0;
 
