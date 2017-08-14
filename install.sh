@@ -9,6 +9,7 @@
 sudo apt-get update
 sudo apt install sqlite3 libcurl4-gnutls-dev pkg-config -y
 
+export PERL_MM_USE_DEFAULT=1
 cpan install Net::Curl::Easy Net::Curl::Multi DBD::SQLite
 
 bash db.sh
