@@ -52,7 +52,7 @@ while (1) {
 
         my $index = $config->index($easy->{url});
 
-        if ($config->invalid($easy->{body}))
+        if ($config->invalid($easy))
         {
             printf("ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s] %s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s,$easy->{url});
             next;

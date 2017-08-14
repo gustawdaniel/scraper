@@ -14,7 +14,7 @@ sub index {
 }
 
 sub invalid { # arg html
-    return $_[1] =~ /<h2>Nic tu nie ma<\/h2>/;
+    return $_[1]->{body} =~ /<h2>Nic tu nie ma<\/h2>/ || $easy->getinfo( CURLINFO_RESPONSE_CODE ) != 200;
 }
 
 #sub select { # arg query
