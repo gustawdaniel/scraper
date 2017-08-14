@@ -35,9 +35,11 @@ open(my $log, ">>res/errors.txt") or die "Cannot open file";
 
 while (1) {
     while ($i<$config->{limit} && $running < $max_running ) {
-        my $easy = make_request( $config->source($i) );
-        $multi->add_handle( $easy );
-        ++$running;
+        unless (-f "raw/".$config->{name}."/".$i.".html") {
+            my $easy = make_request( $config->source($i) );
+            $multi->add_handle( $easy );
+            ++$running;
+        }
         $i++;
     }
 
