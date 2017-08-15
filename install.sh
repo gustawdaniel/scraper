@@ -17,7 +17,7 @@ cpan install Net::Curl::Easy Net::Curl::Multi DBD::SQLite
 bash db.sh
 
 
-# time tar -cf res/all_100000.tar.bz2 --use-compress-prog=pbzip2 raw/all_100000/
+# time tar -cf res/all_0.tar.bz2 --use-compress-prog=pbzip2 raw/all/
 
 # rsync -r --info=progress2 raw/all.bak/all/ raw/all
 
