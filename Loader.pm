@@ -30,13 +30,14 @@ sub load
 
 sub load_errors
 {
-    open my $fh, "res/errors.txt" or die;
-    my %err;
+    my %err = ();
+    open my $fh, "res/errors.txt" or return %err;
     while (<$fh>) {
         chomp;
         my ($word1, $word2) = split /,/;
         $err{$word1} = $word2;
     }
+    close $fh;
     return %err;
 }
 

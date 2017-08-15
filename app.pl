@@ -19,7 +19,7 @@ sub make_request {
 }
 
 my $config = Loader->load();
-my %err = Loader->load_errors;
+my %err = Loader->load_errors();
 
 my $multi = Net::Curl::Multi->new();
 my $running = 0;
@@ -31,10 +31,11 @@ mkdir 'raw', 0755;
 mkdir 'raw/'.$config->{name}, 0755;
 
 open(my $log, ">>res/errors.txt") or die "Cannot open file";
+$SIG{INT} = sub { close($log); die "Caught a sigint $!" };
 
 while (1) {
     while ($i<$config->{limit} && $running < $max_running ) {
-        if (!(-f "raw/".$config->{name}."/".($i+$config->{start}).".html") && $err{$i+$config->{start}} != 404) {
+        if (!(-f "raw/".$config->{name}."/".($i+$config->{start}).".html") && (! defined $err{$i+$config->{start}} || $err{$i+$config->{start}} != 404)) {
             my $easy = make_request( $config->source($i) );
             $multi->add_handle( $easy );
             ++$running;
