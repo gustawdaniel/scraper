@@ -1,10 +1,8 @@
 #!/usr/bin/env perl
 use strict;
 use warnings FATAL => 'all';
-#use LWP::Simple;
 use Net::Curl::Easy  qw( :constants );
 use Net::Curl::Multi qw( );
-#use Try::Tiny;
 
 use Loader;
 
@@ -39,7 +37,6 @@ while (1) {
             my $easy = make_request( $config->source($i) );
             $multi->add_handle( $easy );
             ++$running;
-#            print "ok- $i\n";
         }
         $i++;
     }
@@ -59,21 +56,16 @@ while (1) {
 
         if ($config->invalid($easy->{body},$easy->getinfo( CURLINFO_RESPONSE_CODE )))
         {
-            printf("ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s);
-            printf($log "ID:\t%s - \e[31mERROR   %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,$s);
+            printf("ID: %s - \e[31mERR %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s);
+            printf($log "ID: %s - \e[31mERR %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,$s);
             next;
         }
-
-#        my ($str) = ($easy->{body} =~ /<title>(.*)<\/title>/);
-#
-#        print $str . "\n";
-#        die;
 
         open(my $fh, '>', "raw/".$config->{name}."/".$index.".html") or die "Could not open file: $!";
         print $fh ($easy->{body});
         close $fh;
 
-        printf("ID:\t%s - \e[32mSUCCESS %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,++$s);
+        printf("ID: %s - \e[32mSUC %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,++$s);
     }
 }
 

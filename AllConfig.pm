@@ -3,7 +3,7 @@ use warnings FATAL => 'all';
 
 package AllConfig;
 
-sub new { return bless {start=>5000000,limit=>1000000,rows=>'.layout'}, shift; }
+sub new { return bless {start=>10000000,limit=>1000000,rows=>'.layout'}, shift; }
 #sub new { return bless {start=>1,limit=>1000000,rows=>'.layout'}, shift; }
 
 sub source { # arg index
