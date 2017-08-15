@@ -39,7 +39,6 @@ while (1) {
             my $easy = make_request( $config->source($i) );
             $multi->add_handle( $easy );
             ++$running;
-            print "$i\n";
         }
         $i++;
     }
