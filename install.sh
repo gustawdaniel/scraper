@@ -33,3 +33,6 @@ cd scraper
 
 # old version of logs
 # cat res/errors.txt | perl -lane 'print "$F[1],$F[4]"' | cat > res/errors.txt.bak
+
+# unpack
+# time tar -I lbzip2 -xf res/all_0.tar.bz2 raw/all_0
