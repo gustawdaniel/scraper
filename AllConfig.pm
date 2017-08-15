@@ -3,7 +3,8 @@ use warnings FATAL => 'all';
 
 package AllConfig;
 
-sub new { return bless {start=>4000000,limit=>1000000,rows=>'.layout'}, shift; }
+#sub new { return bless {start=>4000000,limit=>1000000,rows=>'.layout'}, shift; }
+sub new { return bless {start=>1,limit=>1000000,rows=>'.layout'}, shift; }
 
 sub source { # arg index
     return "http://allegro.pl/listing/user/listing.php?us_id=".($_[1]+$_[0]->{start});
