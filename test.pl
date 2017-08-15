@@ -4,19 +4,39 @@ use JSON;
 
 my $config = Loader->load();
 
-my @instances = ();
-my %object = $config->optimal_select("raw/all/10018.html");
-push @instances,\%object;
-my %object2 = $config->optimal_select("raw/all/1680.html");
-push @instances,\%object2;
-my %object3 = $config->optimal_select("raw/all/216.html");
-push @instances,\%object3;
+open my $fh, "res/errors.txt" or die;
+my %err;
+while (<$fh>) {
+    chomp;
+    my ($word1, $word2) = split /,/;
+    $err{$word1} = $word2;
+}
 
-print JSON->new->utf8(0)->encode(
-    {
-        'instances'=> \@instances
-    }
-);
+use Data::Dumper;
+print Dumper \%err;
+
+if($err{20027491+2} == 404) {
+    print "ok\n";
+}
+
+if($err{20027491} == 404) {
+    print "ok\n";
+}
+
+
+#my @instances = ();
+#my %object = $config->optimal_select("raw/all/10018.html");
+#push @instances,\%object;
+#my %object2 = $config->optimal_select("raw/all/1680.html");
+#push @instances,\%object2;
+#my %object3 = $config->optimal_select("raw/all/216.html");
+#push @instances,\%object3;
+#
+#print JSON->new->utf8(0)->encode(
+#    {
+#        'instances'=> \@instances
+#    }
+#);
 
 
 #print $config->index("http://allegro.pl/listing/user/listing.php?us_id=7");

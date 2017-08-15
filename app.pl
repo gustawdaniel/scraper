@@ -6,6 +6,7 @@ use Net::Curl::Multi qw( );
 
 use Loader;
 
+my $max_running = 7;
 
 sub make_request {
     my ( $url ) = @_;
@@ -18,8 +19,8 @@ sub make_request {
 }
 
 my $config = Loader->load();
+my %err = Loader->load_errors;
 
-my $max_running = 7;
 my $multi = Net::Curl::Multi->new();
 my $running = 0;
 
@@ -33,10 +34,11 @@ open(my $log, ">>res/errors.txt") or die "Cannot open file";
 
 while (1) {
     while ($i<$config->{limit} && $running < $max_running ) {
-        unless (-f "raw/".$config->{name}."/".$i.".html") {
+        if (!(-f "raw/".$config->{name}."/".($i+$config->{start}).".html") && $err{$i+$config->{start}} != 404) {
             my $easy = make_request( $config->source($i) );
             $multi->add_handle( $easy );
             ++$running;
+            print "$i\n";
         }
         $i++;
     }
@@ -57,7 +59,7 @@ while (1) {
         if ($config->invalid($easy->{body},$easy->getinfo( CURLINFO_RESPONSE_CODE )))
         {
             printf("ID: %s - \e[31mERR %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s);
-            printf($log "ID: %s - \e[31mERR %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),$e,$s);
+            printf($log "%s,%s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ));
             next;
         }
 

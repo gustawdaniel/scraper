@@ -29,3 +29,7 @@ chmod +x dropbox_uploader.sh
 cd scraper
 
 # ./dropbox_uploader.sh
+
+
+# old version of logs
+# cat res/errors.txt | perl -lane 'print "$F[1],$F[4]"' | cat > res/errors.txt.bak
