@@ -5,7 +5,7 @@ use warnings FATAL => 'all';
 use DBI;
 use Loader;
 
-my $config = Loader->load();
+my $config = Loader->load(0);
 
 my $i = 0;
 
@@ -16,11 +16,9 @@ my $dbh = DBI->connect(
     }
 );
 
-#if(scalar @ARGV && $ARGV[0] eq "final") {
-#    $dbh->do("DELETE FROM log WHERE offers!=0 OR offers IS NULL");
-#} else {
-    $dbh->do("DELETE FROM log");
-#}
+
+$dbh->do("DELETE FROM log");
+
 
 my $sth = $dbh->prepare(<<'SQL');
 INSERT INTO log
@@ -49,10 +47,6 @@ foreach my $file (glob qq("raw/$config->{name}/*.html")) {
         $object{'size'}
     ));
 
-#    if(scalar @ARGV && $ARGV[0] eq "final") {
-#        unlink $file or warn "Could not unlink $file: $!" if ((defined $object{'offers'}) && $object{'offers'} == 0);
-#    }
-        #    last if(++$i >= 50);
 }
 
 $sth->finish;

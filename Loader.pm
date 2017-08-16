@@ -5,26 +5,30 @@ package Loader;
 
 sub load
 {
-    if(scalar @ARGV && $ARGV[0] eq "rhf") {
+    if($_[1] eq "rhf") {
         use RhfConfig;
-        my $config = RhfConfig->new();
+        my $config = RhfConfig->new(1);
         $config->{name} = "rhf";
         return $config;
-    } elsif (scalar @ARGV && $ARGV[0] eq "spcc") {
+    } elsif ($_[1] eq "spcc") {
         use SpccConfig;
-        my $config = SpccConfig->new();
+        my $config = SpccConfig->new(1);
         $config->{name} = "spcc";
         return $config;
-    } elsif (scalar @ARGV && $ARGV[0] eq "ra") {
+    } elsif ($_[1] eq "ra") {
         use RaConfig;
-        my $config = RaConfig->new();
+        my $config = RaConfig->new(1);
         $config->{name} = "ra";
         return $config;
-    } else {
+    } elsif(int($_[1]) >= 0 && int($_[1]) < 47 ) {
         use AllConfig;
-        my $config = AllConfig->new();
+        my $config = AllConfig->new($_[1]);
         $config->{name} = "all";
         return $config;
+    } else  {
+        use Data::Dumper;
+        print Dumper $_[1];
+        die("\e[31mSet integer parameter with chunk number in proper range\e[0m");
     }
 }
 

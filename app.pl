@@ -18,7 +18,12 @@ sub make_request {
     return $easy;
 }
 
-my $config = Loader->load();
+my $config = Loader->load($ARGV[0]);
+#
+#use Data::Dumper;
+#print Dumper \$config;
+#die;
+
 my %err = Loader->load_errors();
 
 my $multi = Net::Curl::Multi->new();
@@ -27,11 +32,11 @@ my $running = 0;
 my $e = 0;
 my $s = 0;
 my $i = 0;
-my $dir = 'raw/'.$config->{name}.'_'.(int($config->{start}/1000000));
+my $dir = 'raw/'.$config->{name}.'_'.$config->{chunk};
 mkdir 'raw', 0755;
 mkdir $dir, 0755;
 
-open(my $log, ">>res/errors.txt") or die "Cannot open file";
+open(my $log, ">>res/errors_".$config->{chunk}.".txt") or die "Cannot open file";
 $SIG{INT} = sub { close($log); die "Caught a sigint $!" };
 
 while (1) {

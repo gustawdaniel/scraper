@@ -5,20 +5,39 @@ if [[ $# -eq 0 ]] ; then
     exit 0
 fi
 
-echo "Processing package $1";
+if [[ $1 == "do" && $2 -ge 0  ]] ; then
 
-cd "$(dirname "$0")"
-tar cf - raw/all | pbzip2 -p$(grep -c ^processor /proc/cpuinfo) > res/all.tar.bz2
+    echo "Processing package $2";
 
-cd ..
+    cd "$(dirname "$0")"
+    tar cf - raw/all_$2 | pv | pbzip2 -p$(grep -c ^processor /proc/cpuinfo) > res/all_$2.tar.bz2
 
-./dropbox_uploader.sh upload scraper/res/errors.txt.new "/Folder zespołu hossa/res/errors_$1.txt";
-./dropbox_uploader.sh upload scraper/res/all.tar.bz2 "/Folder zespołu hossa/res/all_$1.tar.bz2";
+    dropbox upload res/errors_$2.txt.new "/Folder zespołu hossa/res/errors_$2.txt";
+    dropbox upload res/all_$2.tar.bz2 "/Folder zespołu hossa/res/all_$2.tar.bz2";
 
-cd scraper
+fi
 
-mv raw/all raw/all_$1
-mv res/all.tar.bz2 res/all_$1.tar.bz2
-mv res/errors.txt res/errors_$1.txt
+if [[ $1 == "list" ]] ; then
 
-# cd pro/maciej/hurt && source res/.alias && sh_
+    dropbox list "/Folder zespołu hossa/res/"
+
+fi
+
+if [[ $1 == "get" && $2 -ge 0 ]] ; then
+
+    dropbox download "/Folder zespołu hossa/res/errors_"$2'.txt' 'res/errors_'$2'.txt'
+    dropbox download "/Folder zespołu hossa/res/all_"$2'.tar.bz2' 'res/all_'$2'.tar.bz2'
+
+fi
+
+if [[ $1 == "files_implode" ]] ; then
+
+    mkdir -p raw/all
+
+    for f in raw/all_*; do
+         echo "Processing $f catalog...";
+         rsync -r --info=progress2 $f/ raw/all
+    done
+
+fi
+
