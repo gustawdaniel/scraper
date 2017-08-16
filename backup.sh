@@ -12,7 +12,7 @@ if [[ $1 == "do" && $2 -ge 0  ]] ; then
     cd "$(dirname "$0")"
     tar cf - raw/all_$2 | pv | pbzip2 -p$(grep -c ^processor /proc/cpuinfo) > res/all_$2.tar.bz2
 
-    dropbox upload res/errors_$2.txt.new "/Folder zespołu hossa/res/errors_$2.txt";
+    dropbox upload res/errors_$2.txt "/Folder zespołu hossa/res/errors_$2.txt";
     dropbox upload res/all_$2.tar.bz2 "/Folder zespołu hossa/res/all_$2.tar.bz2";
 
 fi
