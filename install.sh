@@ -22,6 +22,7 @@ bash db.sh
 # rsync -r --info=progress2 raw/all.bak/all/ raw/all
 
 # ./dropbox_uploader.sh upload scraper/res/all_1.tar.bz2 "/Folder zespołu hossa/res/all_1.tar.bz2"
+# ./dropbox_uploader.sh upload scraper/res/errors.txt.new "/Folder zespołu hossa/res/errors_11.txt"
 
 cd ..
 curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
@@ -32,7 +33,11 @@ cd scraper
 
 
 # old version of logs
-# cat res/errors.txt | perl -lane 'print "$F[1],$F[4]"' | cat > res/errors.txt.bak
+# cat res/errors.txt | perl -lane 'print "$F[1],$F[4]"' | cat > res/errors.txt.new
 
 # unpack
 # time tar -I lbzip2 -xf res/all_0.tar.bz2 raw/all_0
+
+# copy nth files
+#
+# mkdir -p raw/test_all_1000 && find raw/all -maxdepth 1 -type f | head -1000| xargs │ cp -t raw/test_all_1000

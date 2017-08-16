@@ -14,7 +14,7 @@ sub index {
 }
 
 sub invalid { # arg html
-    return $_[1] =~ /<h2>Nic tu nie ma<\/h2>|<h2>Coś poszło nie tak<\h2>/ || $_[2] != 200;
+    return !defined $_[1] || $_[1] =~ /<h2>Nic tu nie ma<\/h2>|<h2>Coś poszło nie tak<\h2>/ || $_[2] != 200;
 }
 
 sub optimal_select {
