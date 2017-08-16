@@ -1,6 +1,8 @@
 use strict;
 use warnings FATAL => 'all';
 
+use JSON;
+
 package AllConfig;
 
 sub new { return bless {start=>$_[1]*1e6,limit=>1000000,rows=>'.layout','chunk'=>$_[1]}, shift; }
@@ -26,18 +28,19 @@ sub optimal_select {
     my $name;
     my $offers;
     my $additional;
+    my %data;
 
     while (<$fh>) {
-        if ($.>=615 || $.<=640) {
-            ($_) = ($_ =~ /<h1 class="user-info">(.*)<\/h1>/);
-            if($_) {
-                $_ =~ s/<.*?>//g;
-                ($name,$offers,$additional) = ($_ =~ /(?:Użytkownik)?(.*)\s+\(((?:\d+)?(?:\s)?\d+) ofert.?\)(.*)/);
+        if ($.>=615 && $.<=640) {
+            my ($content) = ($_ =~ /<h1 class="user-info">(.*?)<\/h1>/);
+            if($content) {
+                $content =~ s/<.*?>//g;
+                ($name,$offers,$additional) = ($content =~ /(?:Użytkownik)?(.*)\s+\(((?:\d+)?(?:\s)?\d+) ofert.?\)(.*)/);
 
                 if (!(defined $offers)) {
                     warn "file: $_[1]";
                     warn "line: $.";
-                    warn "text: $_";
+                    warn "text: $content";
                     die;
                 }
 #                warn "text: $_";
@@ -46,19 +49,42 @@ sub optimal_select {
                 $additional =~ s/^\s+|\s+$//g;
                 $offers =~ s/\s+//g;
 
-                last;
+                last if $offers==0;
             }
-            last if($.>=640);
+            last if ($.>=640 && $offers==0);
+        }
+
+        if($.>=615) {
+            if(/window\.__listing_CategoryTreeState/) {
+#                print "$_\n";
+                my ($json) = ($_ =~ /window\.__listing_CategoryTreeState = (.*?); /);
+                $json =~ s/\"(\d+)\"/$1/g;
+
+#                print $json;
+#                die;
+
+                my @data = JSON->new->utf8(0)->decode($json);
+                unshift @data, 'category';
+                %data = @data;
+
+
+#                print JSON->new->utf8(0)->encode(\%data);
+#                die;
+            }
         }
     }
 
     close $fh;
 
-    return (
+    my %res = (
         'name'       => $name,
-        'offers'     => $offers,
+        'offers'     => int $offers,
         'additional' => $additional
     );
+
+    %res = (%res,%data ) if %data;
+
+    return %res;
 
 }
 
