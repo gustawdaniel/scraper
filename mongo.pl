@@ -12,7 +12,19 @@ use warnings FATAL => 'all';
 
 #use DBI;
 use Loader;
-
+#use Parallel::ForkManager;
+#
+#my $pm = Parallel::ForkManager->new($MAX_PROCESSES);
+#
+#DATA_LOOP:
+#foreach my $data (@all_data) {
+#    # Forks and returns the pid for the child:
+#    my $pid = $pm->start and next DATA_LOOP;
+#
+#    ... do some work with $data in the child process ...
+#
+#    $pm->finish; # Terminates the child process
+#}
 
 my $config = Loader->load(0);
 my $client = MongoDB->connect();
@@ -30,7 +42,7 @@ foreach my $file (glob qq("raw/$config->{name}/*.html")) {
     $object{'size'} = (stat $file)[7];
     ($object{'_id'}) = map { int } ( $file =~ /(\d+)\.html/);
 
-    last if(++$i >= 500);
+    last if(++$i >= 20000);
 
     next if defined( $coll->find_one( { _id => $object{'_id'} } ) );
 #    print $object{_id}."\n";
@@ -69,11 +81,16 @@ foreach my $file (glob qq("raw/$config->{name}/*.html")) {
 #17
 #18
 #19
+#   20
+#   21
+#                      22
+#   23
+#   24
 #25
 #26
 #27
-#29
 #28
+#29
 #30
 #40
 #41
