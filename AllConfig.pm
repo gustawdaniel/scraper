@@ -51,7 +51,7 @@ sub optimal_select {
 
                 last if $offers==0;
             }
-            last if ($.>=640 && $offers==0);
+            last if ($.>=640 && defined $offers && $offers==0);
         }
 
         if($.>=615) {
@@ -78,7 +78,7 @@ sub optimal_select {
 
     my %res = (
         'name'       => $name,
-        'offers'     => int $offers,
+        'offers'     => defined $offers ? int $offers: -1,
         'additional' => $additional
     );
 

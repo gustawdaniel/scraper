@@ -30,6 +30,17 @@ if [[ $1 == "get" && $2 -ge 0 ]] ; then
 
 fi
 
+if [[ $1 == "get_all" ]] ; then
+
+    mkdir -p res
+
+    for i in $(seq 0 46); do
+        dropbox download "/Folder zespołu hossa/res/errors_"$i'.txt' 'res/errors_'$i'.txt'
+        dropbox download "/Folder zespołu hossa/res/all_"$i'.tar.bz2' 'res/all_'$i'.tar.bz2'
+    done
+
+fi
+
 if [[ $1 == "files_implode" ]] ; then
 
     mkdir -p raw/all
