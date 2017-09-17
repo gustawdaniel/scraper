@@ -20,7 +20,7 @@ foreach my $file (glob qq("dict/*.txt")) {
     }
     close($fh);
 
-    $cmp->removeFromDict($cmp->path_to_int($file));
+#    $cmp->removeFromDict($cmp->path_to_int($file));
     $cmp->addToDict($cmp->path_to_int($file),$content);
 }
 
