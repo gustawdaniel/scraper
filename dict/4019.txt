@@ -1,0 +1,10 @@
+        "
+        >
+        <div data-box-name="breadcrumbs without category" data-prototype-id="allegro.breadcrumb" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.breadcrumb" data-analytics-tags=""><a name="breadcrumbs-without-category"></a>    <ol class="breadcrumb breadcrumb--listing" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="/" itemprop="item" data-analytics-clickable>
+                        <span itemprop="name">Allegro</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">

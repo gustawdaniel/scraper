@@ -1,0 +1,8 @@
+<link type="text/css" rel="stylesheet" href="https://assets.allegrostatic.pl/opbox-skins/1.17.2/styles/listing-vela.css">
+    </head>
+    <body>
+        <div class="side-nav vela"></div>
+        <div class="main-wrapper">
+            <div data-box-name="Container with brandzone background" data-prototype-id="layout.container" data-expand="1" class="lazyload" data-analytics-category="layout.container" data-analytics-tags=""><a name="container-with-brandzone-background"></a><div class="opbox-sheet-wrapper">
+    <div class="opbox-sheet
+        full-width

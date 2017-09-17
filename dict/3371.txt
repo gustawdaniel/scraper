@@ -1,0 +1,1 @@
+<script src="https://assets.allegrostatic.pl/opbox-commons/1.0.4/vendors.js"></script>

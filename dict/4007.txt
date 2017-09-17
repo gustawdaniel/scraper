@@ -1,0 +1,13 @@
+                                <div class="search-type-select"
+                        >
+                                    <ul>
+                                            <li class=""><a  href="#">wszystkie działy</a></li>
+                                            <li class="department"><a  href="#electronics">Elektronika</a></li>
+                                            <li class="department"><a  href="#fashion.beauty">Moda i uroda</a></li>
+                                            <li class="department"><a  href="#household.health">Dom i zdrowie</a></li>
+                                            <li class="department"><a  href="#baby">Dziecko</a></li>
+                                            <li class="department"><a  href="#culture.entertainment">Kultura i rozrywka</a></li>
+                                            <li class="department"><a  href="#sports.leisure">Sport i wypoczynek</a></li>
+                                            <li class="department"><a  href="#automotive">Motoryzacja</a></li>
+                                            <li class="department"><a  href="#collections.art">Kolekcje i sztuka</a></li>
+                                            <li class="department"><a  href="#company.services">Firma</a></li>

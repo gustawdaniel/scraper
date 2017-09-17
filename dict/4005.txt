@@ -1,0 +1,4 @@
+                                        <option value="user" >Użytkownicy</option>
+                                        <option value="closed" >Zakończone</option>
+                                    <option class="custom-search-type"></option>
+                                </select>

@@ -1,0 +1,1 @@
+<link type="text/css" rel="stylesheet" href="https://assets.allegrostatic.pl/opbox-listing/2.2.1/listing.bundle.css">

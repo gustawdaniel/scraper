@@ -14,3 +14,9 @@ sqlite3 res/all.db \
     created_at  UNSIGNED INTEGER,
     size        UNSIGNED INTEGER
 );"
+
+sqlite3 res/all.db \
+"create table IF NOT EXISTS dict (
+    id          VARCHAR(20) PRIMARY KEY,
+    val         TEXT
+);"

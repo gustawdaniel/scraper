@@ -1,0 +1,7 @@
+            <script>
+                var mark = function r(e){function t(){return window.performance.mark&&"function"==typeof window.performance.mark}function n(){return window.performance.measure&&"function"==typeof window.performance.measure}(function(){return"undefined"!=typeof window&&window.performance&&t()&&n()})()&&(window.performance.mark(e),window.performance.measure(e+"Duration","domLoading",e))};
+                mark("itemsListDisplayed_backend");
+            </script>
+        </div>
+        <script>
+            window.__listing_MappedApiResponse =

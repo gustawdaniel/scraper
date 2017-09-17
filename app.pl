@@ -1,4 +1,6 @@
 #!/usr/bin/env perl
+BEGIN {push @INC, 'lib'}
+
 use strict;
 use warnings FATAL => 'all';
 use Net::Curl::Easy  qw( :constants );
@@ -34,6 +36,7 @@ my $s = 0;
 my $i = 0;
 my $dir = 'raw/'.$config->{name}.'_'.$config->{chunk};
 mkdir 'raw', 0755;
+mkdir 'res', 0755;
 mkdir $dir, 0755;
 
 open(my $log, ">>res/errors_".$config->{chunk}.".txt") or die "Cannot open file";

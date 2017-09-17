@@ -1,0 +1,9 @@
+window.addEventListener('DOMContentLoaded', function () {
+    headerJS = require.config(headerJSRequireConfig);
+    headerJS(['require', headerJSModuleConfig.path], function (require) {
+        require([headerJSModuleConfig.name], function (header) {
+            header();
+        });
+    });
+});
+

@@ -1,0 +1,11 @@
+                                <select class="search-type-select" name="search_scope">
+                                        <option value="" >wszystkie działy</option>
+                                        <option value="electronics" >Elektronika</option>
+                                        <option value="fashion.beauty" >Moda i uroda</option>
+                                        <option value="household.health" >Dom i zdrowie</option>
+                                        <option value="baby" >Dziecko</option>
+                                        <option value="culture.entertainment" >Kultura i rozrywka</option>
+                                        <option value="sports.leisure" >Sport i wypoczynek</option>
+                                        <option value="automotive" >Motoryzacja</option>
+                                        <option value="collections.art" >Kolekcje i sztuka</option>
+                                        <option value="company.services" >Firma</option>

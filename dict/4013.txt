@@ -1,0 +1,2 @@
+var headerJS = require.config(headerJSRequireConfig);
+

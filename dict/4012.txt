@@ -1,0 +1,5 @@
+var headerJSModuleConfig = {
+    path: 'https://assets.allegrostatic.pl/opbox-header/2.26.0/scripts/src/headerBuild/header-built.min.js',
+    name: 'header'
+};
+

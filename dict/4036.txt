@@ -1,0 +1,1 @@
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-listing-sort/0.9.0/sort.bundle.css">

@@ -1,0 +1,28 @@
+            ">
+            <div data-box-name="obserwuj" data-prototype-id="allegro.queriesKeeper" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.queriesKeeper" data-analytics-tags=""><a name="obserwuj"></a><section class="queries-keeper" data-category-path="[]" data-type="LISTING_TITLE">
+    <a class="watched_button_star" href="javascript:void(0)">obserwuj wyszukiwanie</a>
+    <div class="queries-keeper-popover popover bottom" style="display: none">
+        <div class="arrow"></div>
+        <button type="button" class="close popover-close">×</button>
+        <div class="qk-popup-content-info" style="display: none">
+            <h3>Nie przegapisz żadnej oferty!</h3>
+            <div class="popover-content">
+                <p>Obserwujesz to wyszukiwanie. Gdy pojawią się nowe oferty powiadomimy Cię mailowo.</p>
+                <p>Możesz przejrzeć swoje <a href="/obserwowane/wyszukiwania">obserwowane wyszukiwania</a>.</p>
+            </div>
+        </div>
+        <div class="qk-popup-content-limit" style="display: none">
+            <h3>Obserwujesz już 300 wyszukiwań!</h3>
+            <div class="popover-content">
+                <p>Możesz obserwować tylko 300 wyszukiwań jednocześnie.</p>
+                <p>By dalej dodawać kolejne wyszukiwania usuń coś z <a href="/obserwowane/wyszukiwania">listy obserwowanych wyszukiwań</a>.</p>
+            </div>
+        </div>
+    </div>
+</section></div>
+        </div>
+</div></div><div data-box-name="user menu" data-prototype-id="allegro.listing.userMenu" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.listing.userMenu" data-analytics-tags=""><a name="user-menu"></a>    <div class="opbox-links-as-tabs-wrapper">
+        <nav class="opbox-links-as-tabs">
+            <ul>
+                    <li class="active">
+                        <a href="http://allegro.pl/listing/user/listing.php?us_id&#x3D;

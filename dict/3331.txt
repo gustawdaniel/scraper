@@ -1,0 +1,2 @@
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-grid/1.2.4/styles/index.css">
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-listing-user-menu/1.1.0/styles/index.css">

@@ -1,0 +1,1 @@
+<link type="text/css" rel="stylesheet" href="https://assets.allegrostatic.pl/opbox-grid/1.2.4/styles/index.css">

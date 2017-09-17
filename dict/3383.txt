@@ -1,0 +1,4 @@
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Open+Sans:300,400,600,700&amp;subset=latin,latin-ext">
+<script> </script>
+<div data-box-name="allegro.header" data-prototype-id="allegro.header" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.header" data-analytics-tags=""><a name="allegro-header"></a><div class="vela header-namespace">
+    <input type="hidden" id="cookie-policy-banner-config" data-config="{&quot;url&quot;:&quot;http://allegro.pl/country_pages/1/0/cookie_policy.php&quot;,&quot;langs&quot;:{&quot;anchor&quot;:&quot;Polityką Plików Cookies&quot;,&quot;message&quot;:&quot;Strona korzysta z plików cookies w celu realizacji usług i zgodnie z %link%. Możesz określić warunki przechowywania lub dostępu do plików cookies w Twojej przeglądarce.&quot;}}"/>

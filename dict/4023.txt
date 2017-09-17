@@ -1,0 +1,6 @@
+/oceny">
+                            <span>Oceny i komentarze</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://allegro.pl/sellerInfoFrontend/

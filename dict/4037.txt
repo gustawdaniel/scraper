@@ -1,0 +1,1 @@
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-listing-filters/1.2.1/filters.bundle.css">

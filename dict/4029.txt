@@ -1,0 +1,109 @@
+        </ul></div></div><div></div></div></div><div class="layout__bottom"></div></div></div>
+    </div>
+</div>
+</div><div data-box-name="allegro.footer" data-prototype-id="allegro.footer" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.footer" data-analytics-tags=""><a name="allegro-footer"></a><footer class="site-footer separator separator-top lang-pl">
+    <div class="container-fluid">
+        <br>
+        <div class="clearfix">
+            <div class="main-footer-logo col-xs-1 hidden-xm hidden-xs hidden-ss hidden-sm">
+                <a
+                    href="https://allegro.pl/"
+                    data-analytics-clickable
+                    data-analytics-click-value="logotype"
+                >
+                    <img src="//cdn.allegrostatic.com/@metrum/brand/allegro-e2b1a7f8.svg" alt="Allegro.pl - aukcje internetowe, bezpieczne zakupy" itemprop="logo">
+                </a>
+            </div>
+            <p class="main-footer-shortcuts text-right col-xs-11">
+                    <a
+                        href="https://magazyn.allegro.pl/3333-o-nas"
+                        data-analytics-clickable
+                    >
+                        <span>O nas</span>
+                    </a>
+                    <a
+                        href="http://biznes.allegro.pl/"
+                        data-analytics-clickable
+                    >
+                        <span>Dla firm</span>
+                    </a>
+                    <a
+                        href="https://dlasprzedajacych.allegro.pl/"
+                        data-analytics-clickable
+                    >
+                        <span>Dla sprzedających</span>
+                    </a>
+                    <a
+                        href="https://allegro.pl/praca"
+                        data-analytics-clickable
+                    >
+                        <span>Praca</span>
+                    </a>
+                    <a
+                        href="http://poznaj.allegro.pl/"
+                        data-analytics-clickable
+                    >
+                        <span>Poznaj Allegro</span>
+                    </a>
+                    <a
+                        href="http://poznaj.allegro.pl/mobilne/"
+                        data-analytics-clickable
+                    >
+                        <span>Mobilne Allegro</span>
+                    </a>
+                    <a
+                        href="https://reklama.allegro.pl/?utm_source&#x3D;internal&amp;utm_medium&#x3D;footer&amp;utm_campaign&#x3D;link"
+                        data-analytics-clickable
+                    >
+                        <span>Reklama</span>
+                    </a>
+                    <a
+                        href="https://allegro.pl/country_pages/1/0/user_agreement.php"
+                        data-analytics-clickable
+                    >
+                        <span>Regulamin</span>
+                    </a>
+                    <a
+                        href="https://pomoc.allegro.pl/"
+                        data-analytics-clickable
+                    >
+                        <span>Centrum Pomocy</span>
+                    </a>
+            </p>
+        </div>
+        <br>
+        <div class="main-footer-additional-info didascalia didascalia-color text-center">
+            <p>
+                Korzystanie z serwisu oznacza akceptację
+                <a
+                    href="https://allegro.pl/country_pages/1/0/user_agreement.php"
+                    data-analytics-clickable
+                >
+                    <span>regulaminu</span>
+                </a>
+            </p>
+            <p class="footer-bottom-links">
+                    <a
+                        href="http://allegro.pl/country_pages/1/0/cookie_policy.php"
+                        data-analytics-clickable
+                    >
+                        <span>Informacja o&nbsp;cookies</span>
+                    </a>
+                    <a
+                        href="https://allegro.pl/mapa-strony"
+                        data-analytics-clickable
+                    >
+                        <span>Mapa&nbsp;strony</span>
+                    </a>
+            </p>
+        </div>
+    </div>
+</footer>
+</div>
+    </div>
+</div>
+</div><div data-box-name="seo without category" data-prototype-id="allegro.listing.seo" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.listing.seo" data-analytics-tags=""><a name="seo-without-category"></a></div>
+        </div>
+        <script src="https://assets.allegrostatic.pl/opbox-web/1.33.2/scripts/opbox.js"></script>
+<script src="https://assets.allegrostatic.pl/opbox-web/1.33.2/scripts/vendors.js"></script>
+<script src="https://assets.allegrostatic.pl/opbox-footer/1.9.0/scripts/footer.js"></script>

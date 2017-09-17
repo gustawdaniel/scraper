@@ -1,0 +1,8 @@
+    <div class="user-links-wrapper">
+        <div class="wrapper-fluid">
+            <ul class="user-nav"
+                id="user-nav"
+                data-domain="http://allegro.pl/"
+                data-root-category-id="954b95b6-43cf-4104-8354-dea4d9b10ddf"
+                data-allegro-api-url="https://edge.allegro.pl"
+                data-department-prefix="dzial">

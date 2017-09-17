@@ -1,0 +1,2 @@
+ Allegro.pl">
+<link rel="alternate" href="android-app://pl.allegro/http/allegro.pl/listing/user/listing.php?us_id=

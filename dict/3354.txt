@@ -1,0 +1,1 @@
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-pagination/1.2.3/styles/index-vela.css">

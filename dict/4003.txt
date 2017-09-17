@@ -1,0 +1,3 @@
+                                           value=""
+                                           placeholder="czego szukasz?"/>
+                                </div>

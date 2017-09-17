@@ -52,3 +52,12 @@ if [[ $1 == "files_implode" ]] ; then
 
 fi
 
+#4	raw/all_1
+#436	raw/all_20
+#652	raw/all_2
+#868	raw/all_7
+#108956	raw/test_all_1000
+#1089364	raw/test_all_10000
+#21751860	raw/all_0
+#21752352	raw/all
+#44704496	raw

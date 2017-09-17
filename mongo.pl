@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
+BEGIN {push @INC, 'lib'}
 use strict;
+use warnings FATAL => 'all';
 
 # cpan App::cpanminus:
 # cpanm MongoDB --force
@@ -7,8 +9,6 @@ use strict;
 use MongoDB;
 use JSON;
 
-use strict;
-use warnings FATAL => 'all';
 
 use Loader;
 use Parallel::ForkManager;
@@ -20,13 +20,10 @@ my $client = MongoDB->connect();
 my $coll = $client->ns("all.users");
 
 my $i = 0;
-
 my @files = ();
 
 foreach my $file (glob qq("raw/$config->{name}/*.html")) {
-
     push @{$files[$i%7]}, $file;
-
     last if(++$i >= 200000);
 }
 
@@ -44,59 +41,15 @@ for my $list (@files) {
 
         $coll->insert_one(
             \%object
-#                    { safe => 1 }
         );
     }
 
     $pm->finish; # Terminates the child process
 }
 $pm->wait_all_children;
-#
-#
-
-#
-#
 
 #print JSON->new->utf8(0)->encode(
 #    {
 #        'instances'=> \@instances
 #    }
 #);
-
-
-#0
-#1
-#2
-#3
-#4
-#5
-#6
-#7
-#8
-#9
-#10
-#11
-#12
-#13
-#14
-#    15
-#    16
-#17
-#18
-#19
-#   20
-#   21
-#                      22
-#   23
-#   24
-#25
-#26
-#27
-#28
-#29
-#30
-#40
-#41
-#42
-#43
-#44

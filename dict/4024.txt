@@ -1,0 +1,8 @@
+/aboutSeller">
+                            <span>Informacje od Sprzedającego</span>
+                        </a>
+                    </li>
+            </ul>
+        </nav>
+    </div>
+</div></div><div class="main-content"><div class="layout__left"><div class="layout__left-content"><div data-box-name="Categories" data-prototype-id="allegro.navigator" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.navigator" data-analytics-tags=""><a name="categories"></a><div id='opbox-category-tree'><section class="category-tree__category-tree__3Mj66" data-reactroot="" data-reactid="1" data-react-checksum="

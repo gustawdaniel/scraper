@@ -1,0 +1,1 @@
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-category-tree/2.1.

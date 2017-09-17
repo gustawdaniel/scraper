@@ -1,0 +1,4 @@
+">
+<meta property="al:android:app_name" content="Allegro">
+<meta property="al:android:package" content="pl.allegro">
+<meta property="al:android:url" content="http://allegro.pl/listing/user/listing.php?us_id=

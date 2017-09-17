@@ -1,0 +1,155 @@
+    <li class="subservices-links ">
+                        <a href="https://allegro.pl/strefamarek?ref&#x3D;navbar"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">Strefa Marek</a>
+                    </li><li class="subservices-links last">
+                        <a href="https://inspiracje.allegro.pl?ref&#x3D;navbar"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">Inspiracje</a>
+                    </li><li class="new-item">
+                        <a href="http://allegro.pl/NewItem/?ref&#x3D;navbar"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">
+                            <span>wystaw przedmiot</span>
+                        </a>
+                    </li><li class="watched">
+                        <a href="http://allegro.pl/favourites/offers?ref&#x3D;navbar"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">
+                            <span>obserwowane</span>
+                        </a>
+                    </li><li class="dropdown ma-layer">
+                        <a href="http://allegro.pl/myaccount/"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">
+                            <span>moje allegro</span>
+                        </a>
+                            <ul id="ma-layer">
+                                    <li>
+                                        <a href="http://allegro.pl/myaccount/won.php?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>kupione</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://allegro.pl/favourites/offers?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>obserwowane</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://allegro.pl/myaccount/bid.php?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>licytujesz</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://allegro.pl/myaccount/sell.php?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>sprzedajesz</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://allegro.pl/myaccount/sold.php?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>sprzedane</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://allegro.pl/user-rating-landing-page/index?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>wystaw ocenę</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://allegro.pl/seller-rating-dashboard/index?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>otrzymane oceny</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://allegro.pl/myaccount/bundles/Index.php?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>centrum zniżek</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://allegro.pl/myaccount/Discounts.php?ref&#x3D;navbar-layer"
+                                            data-analytics-clickable
+                                            data-analytics-click-opbox-custom-placement="navigation_bar_dropdown">
+                                            <span>moje kupony</span>
+                                        </a>
+                                    </li>
+                            </ul>
+                    </li><li class="user-login">
+                        <a href="https://allegro.pl/uzytkownik/userId/oceny"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">
+                            <span>moje oceny</span>
+                        </a>
+                    </li><li class="register">
+                        <a href="https://allegro.pl/rejestracja#/?ref&#x3D;navbar"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">
+                            <span>załóż konto</span>
+                        </a>
+                    </li><li class="logout">
+                        <a href="http://allegro.pl/logout.php?ref&#x3D;navbar"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">
+                            <span>wyloguj</span>
+                        </a>
+                    </li><li class="login">
+                        <a href="https://ssl.allegro.pl/login/auth?ref&#x3D;navbar"
+                            data-analytics-clickable
+                            data-analytics-click-opbox-custom-placement="navigation_bar">
+                            <span>zaloguj</span>
+                        </a>
+                    </li>        </ul>
+        </div>
+    </div>
+    <div data-header-type="full-header" class="full-header main-header-wrapper">
+        <div class="wrapper-fluid">
+            <header id="main-header" class="main-header clearfix">
+                <div id="search-bar" class="search-bar">
+                    <div class="in clearfix">
+                        <a href="#"
+                            class="btn btn-default navigation-toggle"
+                            data-analytics-click-custom-type="side_navigation_toggle"
+                            data-analytics-clickable>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </a>
+                        <h2 class="logo" itemscope itemtype="http://schema.org/Organization">
+                            <a itemprop="url"
+                                href="https://allegro.pl/"
+                                title="Allegro.pl - aukcje internetowe, bezpieczne zakupy"
+                                data-analytics-clickable
+                                data-analytics-click-value="logotype">
+                                <img itemprop="logo" alt="Allegro.pl - aukcje internetowe, bezpieczne zakupy" src="//cdn.allegrostatic.com/@metrum/brand/allegro-e2b1a7f8.svg" class="m-brands-allegro">
+                            </a>
+                        </h2>
+                        <div class="common clearfix">
+                            <form id="main-search" class="main-search"
+                                  method="get"
+                                  action="//allegro.pl/listing/user.php"
+                                  novalidate="novalidate"
+                                  data-cookie-domain=".allegro.pl"
+                                  data-actions="{&quot;default&quot;:{&quot;action&quot;:&quot;//allegro.pl/listing&quot;,&quot;param&quot;:&quot;string&quot;},&quot;userItems&quot;:{&quot;action&quot;:&quot;//allegro.pl/listing/user.php&quot;,&quot;param&quot;:&quot;string&quot;},&quot;user&quot;:{&quot;action&quot;:&quot;//allegro.pl/show_user.php&quot;,&quot;param&quot;:&quot;search&quot;}}"
+                                  data-prevent-redirect="false"
+                                  data-lang="pl_PL"
+                                  data-edge-conf="{&quot;Content-Type&quot;:&quot;application/vnd.allegro.taklif.v0.3+json&quot;,&quot;Accept&quot;:&quot;application/vnd.allegro.taklif.v0.3+json&quot;,&quot;X-Allow-Ssl&quot;:1}"
+                                  data-suggest-endpoint-conf="{&quot;url&quot;:&quot;/placement/suggestions/&quot;,&quot;balancer_index&quot;:&quot;100&quot;,&quot;max_phrase_length&quot;:&quot;50&quot;}"
+                                  data-domain="https://allegro.pl/"
+                        >
+                                <div class="input-text-wrapper">
+                                    <input id="main-search-text" type="text" name="string" x-webkit-speech autocomplete="off" required="required"

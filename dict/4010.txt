@@ -1,0 +1,21 @@
+                                <div class="search-layer" data-analytics-category="suggest.layer">
+                                    <div class="auto-complete-list">
+                                        <ul></ul>
+                                    </div>
+                                    <label class="in-description">
+                                        <input type="checkbox" name="description" value="1"  />
+                                        szukaj też w opisach i parametrach
+                                    </label>
+                                </div>
+                                    <script type="application/ld+json">
+                                        {
+                                            "@context": "http://schema.org",
+                                            "@type": "WebSite",
+                                            "url": "https://allegro.pl/",
+                                            "potentialAction": {
+                                                "@type": "SearchAction",
+                                                "target": "https://allegro.pl/listing/user.php?string={string}",
+                                                "query-input": "required name=string"
+                                            }
+                                        }
+                                    </script>

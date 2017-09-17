@@ -1,0 +1,4 @@
+        "
+         style="background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) center top / auto no-repeat fixed "
+        >
+        <div data-box-name="allegro.header" data-prototype-id="allegro.header" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.header" data-analytics-tags=""><a name="allegro-header"></a><div class="opbox-fragment"><script>var opbox = opbox ||

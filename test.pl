@@ -1,86 +1,49 @@
+#!/usr/bin/env perl
+BEGIN {push @INC, 'lib'}
 use strict;
+use warnings FATAL => 'all';
+use Try::Tiny;
 use Loader;
+use Compressor;
 use JSON;
 
-my $config = Loader->load();
+my $config = Loader->load(0);
+my $cmp = Compressor->new();
 
-open my $fh, "res/errors.txt" or die;
-my %err;
-while (<$fh>) {
-    chomp;
-    my ($word1, $word2) = split /,/;
-    $err{$word1} = $word2;
-}
 
-use Data::Dumper;
-print Dumper \%err;
+foreach my $file (glob qq("dict/*.txt")) {
+    my $content;
+    open(my $fh, '<', $file) or die "cannot open file $file";
+    {
+        local $/;
+        $content = <$fh>;
+    }
+    close($fh);
 
-if($err{20027491+2} == 404) {
-    print "ok\n";
-}
-
-if($err{20027491} == 404) {
-    print "ok\n";
+    $cmp->removeFromDict($cmp->path_to_int($file));
+    $cmp->addToDict($cmp->path_to_int($file),$content);
 }
 
 
-#my @instances = ();
-#my %object = $config->optimal_select("raw/all/10018.html");
-#push @instances,\%object;
-#my %object2 = $config->optimal_select("raw/all/1680.html");
-#push @instances,\%object2;
-#my %object3 = $config->optimal_select("raw/all/216.html");
-#push @instances,\%object3;
-#
+
+my $i = 0;
+my $counter = 0;
+
 #print JSON->new->utf8(0)->encode(
 #    {
-#        'instances'=> \@instances
+#        'dict'=> $cmp->{dict}
 #    }
 #);
 
 
-#print $config->index("http://allegro.pl/listing/user/listing.php?us_id=7");
+foreach my $file (glob qq("raw/$config->{name}/*.html")) {
+    $counter += $cmp->count($file,$cmp->{dict}{3389});
+    last if(++$i >= 200);
+}
 
-#use Net::Curl::Easy  qw( :constants );
-#use Net::Curl::Multi qw( );
-#
-#sub make_request {
-#    my ( $url ) = @_;
-#    my $easy = Net::Curl::Easy->new();
-#    $easy->{url} = $url;
-#    $easy->setopt( CURLOPT_URL,        $url );
-#    $easy->setopt( CURLOPT_HEADERDATA, \$easy->{head} );
-#    $easy->setopt( CURLOPT_FILE,       \$easy->{body} );
-#    return $easy;
-#}
-#
-#
-#my $max_running = 10;
-#my $multi = Net::Curl::Multi->new();
-#my $running = 0;
-#
-#while (1) {
-#    while ($running < $max_running ) {
-#        my $easy = make_request( "http://localhost:8000/test.html" );
-#        $multi->add_handle( $easy );
-#        ++$running;
-#        last;
-#    }
-#
-#    last if !$running;
-#
-#    my ( $r, $w, $ee ) = $multi->fdset();
-#    my $timeout = $multi->timeout();
-#    select( $r, $w, $ee, $timeout / 1000 )
-#        if $timeout > 0;
-#
-#    $running = $multi->perform();
-#    while ( my ( $msg, $easy, $result ) = $multi->info_read() ) {
-#        $multi->remove_handle( $easy );
-#
-#        print $easy->{body};
-#
-#        last;
-#    }
-#}
+print "Files:  ".$i."\n";
+print "Counts: ".$counter."\n";
+print "Ratio: ".( try {$counter/$i} catch{ 0 } )."\n";
 
+#print $cmp->path_to_code("dict/3328.txt") . "\n";
+#print $cmp->code_to_path("ഀ"). "\n";

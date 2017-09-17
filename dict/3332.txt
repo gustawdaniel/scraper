@@ -1,0 +1,7 @@
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-listing-layout/0.12.4/styles/vela.css">
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-footer/1.9.0/styles/footer.css">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Open+Sans:300,400,600,700&amp;subset=latin,latin-ext">
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-skins/1.17.2/styles/common.css">
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-skins/1.17.2/styles/listing-vela.css">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta charset="UTF-8">

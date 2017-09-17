@@ -1,0 +1,1 @@
+<span class="user-info__blocked"> konto zawieszone <a href="http://faq.allegro.pl/artykul/27559/kiedy-mozemy-zawiesic-twoje-konto-lub-ograniczyc-jego-funkcj" target="_blank"><i class="user-info__helper-icon"></i></a> </span>

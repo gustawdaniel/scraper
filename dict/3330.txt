@@ -1,0 +1,3 @@
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-user-info/2.1.0/styles/index.css">
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-breadcrumb/0.6.8/styles/index.css">
+<link rel="preload" as="style" href="https://assets.allegrostatic.pl/opbox-container/2.11.0/styles/index.css">

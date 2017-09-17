@@ -1,4 +1,9 @@
 #!/usr/bin/env perl
+
+#
+# TODO: DEPRECIATED
+#
+
 use strict;
 use warnings FATAL => 'all';
 

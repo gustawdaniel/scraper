@@ -1,0 +1,8 @@
+            window.__listing_CategoryData = undefined;
+        </script>
+    </div><div data-box-name="empty listing with queriesKeeper" data-prototype-id="allegro.queriesKeeper" data-expand="1" class="lazyload" data-analytics-enabled data-analytics-category="allegro.queriesKeeper" data-analytics-tags=""><a name="empty-listing-with-querieskeeper"></a><div class="queries-keeper-empty-page">
+    <section class="queries-keeper" data-type="SELLER_LISTING_EMPTY_PAGE">
+        <a class="watched_button_star" href="javascript:void(0)">obserwuj wyszukiwanie</a>
+    </section>
+    <p>Powiadomimy Cię przez e-mail gdy sprzedawca wystawi pasujące oferty.</p>
+</div>
