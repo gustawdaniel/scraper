@@ -35,3 +35,11 @@ dropbox
 # copy nth files
 #
 # mkdir -p raw/test_all_1000 && find raw/all -maxdepth 1 -type f | head -1000| xargs │ cp -t raw/test_all_1000
+
+    sudo apt-get install pandoc
+    python -m pip install --user suffix_trees
+
+Get 200 test files
+
+    find raw/all -maxdepth 1 -type f |head -1000|xargs cp -t raw/all_200
+
