@@ -23,7 +23,7 @@ sub new {
     while( my( $item, $quantity ) = $sth->fetchrow_array() ) {
         $dict{ $item } = $quantity;
     }
-    $dbh->disconnect;
+#    $dbh->disconnect;
     return bless {
             "dict"=>\%dict,
             "l"=>"ջ",

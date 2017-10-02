@@ -15,11 +15,9 @@ my $cmp = Compressor->new();
 my $i = 0;
 my @files = ();
 my $content = "";
-my $nr = "200";
-mkdir "raw/cmp_$nr", 0755;
+mkdir "raw/cmp", 0755;
 
-#foreach my $file (glob qq("raw/$config->{name}_$nr/*.html")) {
-foreach my $file (glob qq("raw/all_$nr/*.html")) {
+foreach my $file (glob qq("raw/$config->{name}/*.html")) {
     push @{$files[$i%7]}, $file;
     last if(++$i >= 200000);
 }
