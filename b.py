@@ -4,7 +4,7 @@ from suffix_trees import STree
 import os
 import random
 
-sample = 2;
+sample = 10;
 path   = 'raw/all_200';
 files  = random.sample(os.listdir(path), sample);
 data   = [];
