@@ -6,9 +6,22 @@ path='../raw/all';
 limit="$1";
 
 [ -z "$limit" ]\
-	&& echo "No limit1"\
+	&& echo "[ERROR] First argument have to be samples limit!"\
+	&& exit 1;
+
+[ ! -d "$path" ]\
+	&& echo "[ERROR] Samples directory ($path) does not exist!"\
+	&& exit 2;
+
+[[ "$limit" =~ '^[0-9]+$' ]]\
+	&& echo "Script is testing compressioner."\
+	&& echo "Take N samples from $path and compress it."\
+	&& echo "execution:"\
+	&& echo "bash $0 <N>"\
 	&& exit;
 
+echo ok
+exit;
 rm -Rf in;
 rm -Rf out;
 rm -Rf test;
@@ -50,6 +63,8 @@ cat <<-EOF | python
 	count = float($count);
 	dict  = $dict;
 	
+	print 'Samples count: %d' % count;
+	print;
 	print 'Time for move: %0.2f s' % time_move;
 	print 'Time for compression: %0.2f s' % time_comp;
 	print 'Time for decompression: %0.2f s' % time_deco;
@@ -59,7 +74,6 @@ cat <<-EOF | python
 	print 'Compression size ratio: %0.2f%%' % (100*(1-size_out/size_in));
 	print 'Compression dict count: %d' % dict;
 	print;
-	print 'Files count: %d' % count;
 	print 'Files size in: %0.2f MB' % size_in;
 	print 'Files size out: %0.2f MB' % size_out;
 	print 'Files size test: %0.2f MB' % size_test;

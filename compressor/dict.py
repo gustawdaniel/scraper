@@ -25,6 +25,7 @@ num  = 0;
 
 # Petla glowna.
 while True:
+	# Wczytywanie prubek plików w których będzie wyszukiwane nowe słowo.
 	print '################ SAMPLES';
 	samples = samples_read(samples_path, samples_num);
 	files   = [s['file'] for s in samples];
@@ -33,6 +34,7 @@ while True:
 	for s in samples:
 		print "\t" + s['name'] + "\t" + str(s['size']);
 	
+	# Kompresowanie plików aktualnym słownikiem.
 	print '################ COMPRESS';
 	for key,file in enumerate(files):
 		files[key] = compress(dict,file);
@@ -43,11 +45,13 @@ while True:
 	if num >= dict_max:
 		break;
 	
+	# Szukanie najdłóższego wspólnego podciągu.
 	print '################ LCS';
 	word = lcs(files);
 	size = len(word);
 	num  = num + 1;
 	
+	# Wypisywanie informacji o znalezionym podciągu.
 	print '################ INFO';
 	print 'num  = %d' % num;
 	print 'size = %d' % size;
@@ -55,6 +59,7 @@ while True:
 	if size < dict_min:
 		break;
 	
+	# Dodawanie podciągu do słownika.
 	print '################ ADD';
 	dict = dict_add(dict_path,word);
 
