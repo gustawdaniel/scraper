@@ -11,7 +11,7 @@ def samples_read(dir, limit):
 	
 	for key,name in enum:
 		path = os.path.join(dir,name);
-		file = open(path,"r").read().decode('utf8').encode('ascii','ignore');
+		file = open(path,"r").read();
 		size = len(file);
 		
 		samples.append({

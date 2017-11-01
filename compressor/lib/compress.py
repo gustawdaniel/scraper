@@ -4,11 +4,12 @@
 # Funkcja kompresujaca dane.
 def compress(dict, data):
 	
+	data  = data.decode('utf8').encode('unicode-escape');
+	
 	for item in dict:
 		tag  = item['tag'];
 		word = item['word'];
 		data = data.replace(word, tag);
-		data = data.encode('ascii','ignore');
 	
 	return data;
 
@@ -19,7 +20,8 @@ def decompress(dict, data):
 		tag  = item['tag'];
 		word = item['word'];
 		data = data.replace(tag, word);
-		data = data.encode('ascii','ignore');
+	
+	data = data.decode('unicode-escape').encode('utf8');
 	
 	return data;
 

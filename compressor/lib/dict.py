@@ -41,9 +41,9 @@ def dict_add(dir,dict,word):
 	# Dodawanie nowego slowa do slownika.
 	dict.append({
 		'path': path,
-		'word': word,
+		'word': word.encode('ascii'),
 		'name': name,
-		'tag':  tag,
+		'tag':  tag.encode('ascii'),
 	});
 	
 	# Zwracanie rozszerzonego slownika.
@@ -68,14 +68,14 @@ def dict_load(dir):
 	# Dodawanie slow do slownika.
 	for key,name in enum:
 		path = os.path.join(dir,name);
-		file = open(path,"r").read().decode('utf8').encode('ascii', 'ignore');
+		file = open(path,"r").read();
 		tag  = pattern % int(name);
 		
 		dict.append({
 			'path': path,
-			'word': file,
+			'word': file.encode('ascii'),
 			'name': name,
-			'tag':  tag,
+			'tag':  tag.encode('ascii'),
 		});
 	
 	# Zwracanie slownika.

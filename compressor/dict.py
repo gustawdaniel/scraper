@@ -10,12 +10,12 @@ execfile("lib/samples.py");
 execfile("lib/lcs.py");
 
 # Parametry skryptu:
-samples_num  =   2; # 12;                                            # Ilosc plikow brana do prubkowania.
-samples_path = '/home/kot/Pulpit/daniel/scraper/raw/all';            # Sciezka do katalogu z probkami.
-dict_min     =  20;                                                  # Minimalna dopuszczalna wielkosc wpisu w slowniku.
-dict_max     =  10;                                                  # Maksymalna dopuszczalna ilosc wpisow w slowniku.
-dict_path    = '/home/kot/Pulpit/daniel/scraper/compressor/dict';    # Sciezka do katalogu ze slownikiem.
-pattern      = '[#]%s[#]';                                           # Wzor na ktorym zostaje zastapiony wpis w slowniku.
+samples_num  =   12; # 12;      # Ilosc plikow brana do prubkowania.
+samples_path = '../raw/all';    # Sciezka do katalogu z probkami.
+dict_min     =   20;            # Minimalna dopuszczalna wielkosc wpisu w slowniku.
+dict_max     =  100;            # Maksymalna dopuszczalna ilosc wpisow w slowniku.
+dict_path    = 'dict';          # Sciezka do katalogu ze slownikiem.
+pattern      = '[#]%s[#]';      # Wzor na ktorym zostaje zastapiony wpis w slowniku.
 
 # Zmienne pomocnicze.
 dict = dict_init(dict_path,pattern);

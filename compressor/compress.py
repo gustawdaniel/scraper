@@ -18,7 +18,7 @@ files = os.listdir(dir_in);
 for name in files:
 	path_in  = os.path.join(dir_in,  name);
 	path_out = os.path.join(dir_out, name);
-	buff     = open(path_in,"r").read().decode('utf8').encode('ascii','ignore');
+	buff     = open(path_in,"r").read();
 	buff     = compress(dict,buff);
 	file = open(path_out,"w");
 	file.write(buff);
