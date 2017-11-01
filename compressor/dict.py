@@ -12,13 +12,15 @@ execfile("lib/lcs.py");
 # Parametry skryptu:
 samples_num  =   12; # 12;      # Ilosc plikow brana do prubkowania.
 samples_path = '../raw/all';    # Sciezka do katalogu z probkami.
-dict_min     =   20;            # Minimalna dopuszczalna wielkosc wpisu w slowniku.
-dict_max     =  100;            # Maksymalna dopuszczalna ilosc wpisow w slowniku.
+dict_min     =   20;            # Minimalna dopuszczalna wielkosc wpisu w slowniku przy budowaniu.
+dict_max     =  100;            # Maksymalna dopuszczalna ilosc wpisow w slowniku przy budowaniu.
 dict_path    = 'dict';          # Sciezka do katalogu ze slownikiem.
-pattern      = '[#]%s[#]';      # Wzor na ktorym zostaje zastapiony wpis w slowniku.
+dict_pattern = '@%02x';         # Wzor na ktorym zostaje zastapiony wpis w slowniku (starczy na 255 wpisow).
+dict_first   = "@";             # Pierwszy wpis w slowniku, ktory jest ucieczka przed aktualnym wzorem.
 
 # Zmienne pomocnicze.
-dict = dict_init(dict_path,pattern);
+dict = dict_init(dict_path,dict_pattern);
+dict = dict_add (dict_path,dict_first);
 num  = 0;
 
 # Petla glowna.
@@ -54,5 +56,5 @@ while True:
 		break;
 	
 	print '################ ADD';
-	dict = dict_add(dict_path,dict,word);
+	dict = dict_add(dict_path,word);
 

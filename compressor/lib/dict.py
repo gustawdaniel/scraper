@@ -13,7 +13,7 @@ def dict_init(dir,pattern):
 		os.unlink(path);
 	
 	# Zapisywanie nowego wzorca tagu.
-	path = os.path.join(dir,'0');
+	path = os.path.join(dir,'-1');
 	file = open(path,"w");
 	file.write(pattern);
 	file.close();
@@ -22,43 +22,28 @@ def dict_init(dir,pattern):
 	return [];
 
 # Dodawanie slowa do slownika.
-def dict_add(dir,dict,word):
-	
-	# Wczytywanie wzorca tagu.
-	path    = os.path.join(dir,'0');
-	pattern = open(path,"r").read();
+def dict_add(dir,word):
 	
 	# Zapisywanie nowego slowa.
-	name = str(len(os.listdir(dir)));
-	path = os.path.join(dir,name);
+	key  = len(os.listdir(dir))-1;
+	path = os.path.join(dir,str(key));
 	file = open(path,"w"); 
 	file.write(word);
 	file.close();
 	
-	# Tworzenie nowego tagu.
-	tag = pattern % name;
-	
-	# Dodawanie nowego slowa do slownika.
-	dict.append({
-		'path': path,
-		'word': word.encode('ascii'),
-		'name': name,
-		'tag':  tag.encode('ascii'),
-	});
-	
 	# Zwracanie rozszerzonego slownika.
-	return dict;
+	return dict_load(dir);
 
 # Wczytywanie slownika.
 def dict_load(dir):
 	
 	# Wczytywanie wzorca tagu.
-	path    = os.path.join(dir,'0');
+	path    = os.path.join(dir,'-1');
 	pattern = open(path,"r").read();
 	
 	# Wczytywanie listy slow.
 	files = os.listdir(dir);
-	files.remove('0');
+	files.remove('-1');
 	files.sort(cmp=lambda a,b: int(a)-int(b));
 	enum  = enumerate(files);
 	
@@ -67,15 +52,22 @@ def dict_load(dir):
 	
 	# Dodawanie slow do slownika.
 	for key,name in enum:
+		# Wczytywanie slowa.
 		path = os.path.join(dir,name);
-		file = open(path,"r").read();
+		word = open(path,"r").read();
 		tag  = pattern % int(name);
+		key  = int(name);
 		
+		# Dbanie o odpowiednie kodowanie.
+		word = word.encode('ascii');
+		tag  = tag.encode('ascii');
+		
+		# Dodawanie slowa do slownika.
 		dict.append({
 			'path': path,
-			'word': file.encode('ascii'),
-			'name': name,
-			'tag':  tag.encode('ascii'),
+			'word': word,
+			'tag':  tag,
+			'key':  key,
 		});
 	
 	# Zwracanie slownika.
