@@ -19,6 +19,11 @@ sub invalid { # arg html
     return !defined $_[1] || $_[1] =~ /<h2>Nic tu nie ma<\/h2>|<h2>Coś poszło nie tak<\h2>/ || $_[2] != 200;
 }
 
+sub proxy {
+    my @arr = ('185.101.69.253:8085','178.57.68.221:8085','37.9.40.246:8085','185.101.71.239:8085','185.106.104.35:8085');
+    return @arr[($_[1] || int(rand(scalar @arr))) % scalar @arr];
+}
+
 sub optimal_select {
 
     open my $fh, '<', $_[1]

@@ -17,7 +17,7 @@ sub make_request {
     $easy->setopt( CURLOPT_URL,        $url );
     $easy->setopt( CURLOPT_HEADERDATA, \$easy->{head} );
     $easy->setopt( CURLOPT_FILE,       \$easy->{body} );
-    $easy->setopt( CURLOPT_PROXY, '91.135.216.51:53281');
+    $easy->setopt( CURLOPT_PROXY, '185.101.69.253:8085');
     return $easy;
 }
 

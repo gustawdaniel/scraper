@@ -11,12 +11,14 @@ use Loader;
 my $max_running = 7;
 
 sub make_request {
-    my ( $url ) = @_;
+    my ( $url, $proxy ) = @_;
     my $easy = Net::Curl::Easy->new();
     $easy->{url} = $url;
     $easy->setopt( CURLOPT_URL,        $url );
     $easy->setopt( CURLOPT_HEADERDATA, \$easy->{head} );
     $easy->setopt( CURLOPT_FILE,       \$easy->{body} );
+    $easy->setopt( CURLOPT_PROXY, $proxy);
+    $easy->setopt( CURLOPT_FOLLOWLOCATION, 1);
     return $easy;
 }
 
@@ -45,7 +47,7 @@ $SIG{INT} = sub { close($log); die "Caught a sigint $!" };
 while (1) {
     while ($i<$config->{limit} && $running < $max_running ) {
         if (!(-f $dir."/".($i+$config->{start}).".html") && (! defined $err{$i+$config->{start}} || $err{$i+$config->{start}} != 404)) {
-            my $easy = make_request( $config->source($i) );
+            my $easy = make_request( $config->source($i), $config->proxy($i) );
             $multi->add_handle( $easy );
             ++$running;
         }
@@ -67,7 +69,7 @@ while (1) {
 
         if ($config->invalid($easy->{body},$easy->getinfo( CURLINFO_RESPONSE_CODE )))
         {
-            printf("ID: %s - \e[31mERR %s\e[0m - [e: %s, s: %s]\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s);
+            printf("ID: %s - \e[31mERR %s\e[0m - [e: %s, s: %s] $easy->{url}\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ),++$e,$s);
             printf($log "%s,%s\n",$index,$easy->getinfo( CURLINFO_RESPONSE_CODE ));
             next;
         }
