@@ -26,3 +26,12 @@ Oraz 2 sekundy dokompresowania do 2.3 M
 Kopiowanie między katalogami:
 
     find raw/all_0 -name '*.*' -exec mv {} raw/all \;
+    
+    
+Sprawdzanie otwartych portów
+
+    netstat -ntlp | grep LISTEN
+    
+albo
+    
+    nmap localhost
