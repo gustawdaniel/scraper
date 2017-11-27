@@ -1,0 +1,23 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustawdaniel/scraper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gustawdaniel/scraper/issues"
+  },
+  "homepage": "https://github.com/gustawdaniel/scraper#readme",
+  "dependencies": {
+    "selenium-standalone": "^6.11.0",
+    "selenium-webdriver": "^3.6.0"
+  }
+}
