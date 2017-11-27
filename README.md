@@ -11,6 +11,7 @@ Open selenium server
     selenium-standalone install
     selenium-standalone start
 
-Open new bash and start app
+Open new bash and start lento example
 
-    node app.js
+    node lento.js
+
