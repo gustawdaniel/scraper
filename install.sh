@@ -4,11 +4,23 @@
 
 # find raw/all/ -path '*/.*' -prune -o -type f -print | head -n 10 |  xargs -I {} du {} | awk '{sum+=$1} END {print sum}'
 
-sudo apt-get update
-sudo apt install sqlite3 libcurl4-gnutls-dev pkg-config pbzip2 pv  -y
+# install mongo
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
 
-export PERL_MM_USE_DEFAULT=1
-cpan install Net::Curl::Easy Net::Curl::Multi DBD::SQLite MongoDB
+sudo apt-get update
+sudo apt install sqlite3 libcurl4-gnutls-dev pkg-config pbzip2 pv mongodb-org curl -y
+
+
+# export PERL_MM_USE_DEFAULT=1
+curl -L http://cpanmin.us | perl - App::cpanminus
+# cpanm local::lib
+# cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+$HOME/perl5/bin/cpanm local::lib
+echo 'eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)' >> ~/.bash_profile
+. ~/.bash_profile
+
+cpanm Net::Curl::Easy Net::Curl::Multi DBD::SQLite MongoDB
 
 bash db.sh
 
