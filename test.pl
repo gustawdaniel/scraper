@@ -1,27 +1,105 @@
-use strict;
-use Loader;
+#!/usr/bin/env perl
+
+#require HTML::Query;
+use Mojo::DOM;
 use JSON;
-
-my $config = Loader->load();
-
-open my $fh, "res/errors.txt" or die;
-my %err;
-while (<$fh>) {
-    chomp;
-    my ($word1, $word2) = split /,/;
-    $err{$word1} = $word2;
-}
-
+use open ':encoding(UTF-8)';
 use Data::Dumper;
-print Dumper \%err;
 
-if($err{20027491+2} == 404) {
-    print "ok\n";
+my $contents = do { local(@ARGV, $/) = 'raw/bazalekow/medicine/4244.html'; <> };
+
+my %data = ();
+
+$contents =~ s/(<tbody>.*<\/tbody>)/$data{'part'}=$1;/egs;
+
+
+my $dom = Mojo::DOM->new($data{part});
+
+#print $contents."\n";
+
+#my $q = HTML::Query->new( text => $data{'part'} );
+
+my $trs = Mojo::DOM->new($dom->at('tbody')->content)->find('tr:not([style])');
+my @arr = ();
+
+foreach my $tr ($trs->each) {
+
+#print Dumper $tr;
+
+    my @tds = Mojo::DOM->new($tr->content)->find('td')->each;
+
+    my %hash = (
+        'name' => @tds[0]->text,
+        'character' => @tds[1]->text =~ /(.*?);.*/s,
+        'dose' => @tds[1]->text =~ /.*;\s*(.*?)\s*;.*/s,
+        'package' => @tds[1]->text =~ /.*;(.*?)/s,
+        'manufacturer' => @tds[2]->text,
+        'price' => @tds[3]->text,
+        'price_after_refund' => @tds[4]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg,
+        'pharmacy' => @tds[5]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg
+    );
+    push @arr, \%hash;
 }
 
-if($err{20027491} == 404) {
-    print "ok\n";
-}
+%data = (
+    %data,
+#    tr => $q->query('tr')->first->as_trimmed_text,
+    character => \@arr,
+#    html => $q->as_HTML
+);
+
+print JSON->new->utf8(0)->encode( \%data );
+
+#print $data{part};
+#
+#print "\n" . "-" x 80 . "\n";
+
+
+#print $dom->find('tbody>tr:not([style])')->map('content')->join("\n" . "=" x 80 . "\n");
+
+#print $data{part};
+
+#sub optimal_select { # arg query
+##
+##    print $_[1];
+#
+#    my $q = HTML::Query->new( file => $_[1] );
+#
+#    my %hash;
+#    @hash{$q->query('.inputArea.full h3')->as_trimmed_text} = $q->query('.inputArea.full span')->as_trimmed_text;
+#    return %hash;
+#}
+#
+#print JSON->new->utf8(0)->encode(
+#    {
+#        'instances'=> \optimal_select("raw/ra/1.html")
+#    }
+#);
+
+#use strict;
+#use Loader;
+#use JSON;
+#
+#my $config = Loader->load();
+#
+#open my $fh, "res/errors.txt" or die;
+#my %err;
+#while (<$fh>) {
+#    chomp;
+#    my ($word1, $word2) = split /,/;
+#    $err{$word1} = $word2;
+#}
+#
+#use Data::Dumper;
+#print Dumper \%err;
+#
+#if($err{20027491+2} == 404) {
+#    print "ok\n";
+#}
+#
+#if($err{20027491} == 404) {
+#    print "ok\n";
+#}
 
 
 #my @instances = ();

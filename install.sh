@@ -20,7 +20,7 @@ $HOME/perl5/bin/cpanm local::lib
 echo 'eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)' >> ~/.bash_profile
 . ~/.bash_profile
 
-cpanm Net::Curl::Easy Net::Curl::Multi DBD::SQLite MongoDB
+cpanm Net::Curl::Easy Net::Curl::Multi DBD::SQLite MongoDB JSON Parallel::ForkManager HTML::Query Mojo::DOM
 
 bash db.sh
 

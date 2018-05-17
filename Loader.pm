@@ -5,22 +5,22 @@ package Loader;
 
 sub load
 {
-    if($_[1] eq "rhf") {
+    if(defined $_[1] && $_[1] eq "rhf") {
         use RhfConfig;
         my $config = RhfConfig->new(1);
-        $config->{name} = "rhf";
+        $config->{name} = "rhf"; $config->{chunk} = "";  $config->{start} = 0;
         return $config;
-    } elsif ($_[1] eq "spcc") {
+    } elsif (defined $_[1] && $_[1] eq "spcc") {
         use SpccConfig;
         my $config = SpccConfig->new(1);
-        $config->{name} = "spcc";
+        $config->{name} = "spcc"; $config->{chunk} = ""; $config->{start} = 0;
         return $config;
-    } elsif ($_[1] eq "ra") {
+    } elsif (defined $_[1] && $_[1] eq "ra") {
         use RaConfig;
         my $config = RaConfig->new(1);
-        $config->{name} = "ra";
+        $config->{name} = "ra"; $config->{chunk} = ""; $config->{start} = 0;
         return $config;
-    } elsif(int($_[1]) >= 0 && int($_[1]) < 47 ) {
+    } elsif(defined $_[1] && int($_[1]) >= 0 && int($_[1]) < 47 ) {
         use AllConfig;
         my $config = AllConfig->new($_[1]);
         $config->{name} = "all";
@@ -28,7 +28,7 @@ sub load
     } else  {
         use Data::Dumper;
         print Dumper $_[1];
-        die("\e[31mSet integer parameter with chunk number in proper range\e[0m");
+        die("\e[31mSet integer parameter with chunk number in proper (0-47) or rhf, spcc, ra\e[0m");
     }
 }
 

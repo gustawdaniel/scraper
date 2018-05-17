@@ -1,21 +1,28 @@
 #!/usr/bin/env perl
 use strict;
 
+# usage
+# perl mongo.pl ra
+
 # cpan App::cpanminus:
 # cpanm MongoDB --force
+use warnings FATAL => 'all';
+
 
 use MongoDB;
 use JSON;
 
-use strict;
-use warnings FATAL => 'all';
+
+use Parallel::ForkManager;
+
+use File::Basename;
+use lib dirname (__FILE__);
 
 use Loader;
-use Parallel::ForkManager;
 
 my $pm = Parallel::ForkManager->new(7);
 
-my $config = Loader->load(0);
+my $config = Loader->load($ARGV[0]);
 my $client = MongoDB->connect();
 my $coll = $client->ns("all.users");
 

@@ -1,8 +1,15 @@
 #!/usr/bin/env perl
+
+# usage
+# perl app.pl ra
+
 use strict;
 use warnings FATAL => 'all';
 use Net::Curl::Easy  qw( :constants );
 use Net::Curl::Multi qw( );
+
+use File::Basename;
+use lib dirname (__FILE__);
 
 use Loader;
 
@@ -32,8 +39,9 @@ my $running = 0;
 my $e = 0;
 my $s = 0;
 my $i = 0;
-my $dir = 'raw/'.$config->{name}.'_'.$config->{chunk};
+my $dir = 'raw/'.$config->{name}.($config->{chunk} ? '_' : '').$config->{chunk};
 mkdir 'raw', 0755;
+mkdir 'res', 0755;
 mkdir $dir, 0755;
 
 open(my $log, ">>res/errors_".$config->{chunk}.".txt") or die "Cannot open file";
