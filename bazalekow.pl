@@ -138,8 +138,10 @@ foreach my $object (@instances) {
             'manufacturer' => @tds[2]->text,
             'price' => @tds[3]->text,
             'price_after_refund' => @tds[4]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg,
-            'pharmacy' => @tds[5]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg,
         );
+        if(@tds[5]) {
+            $hash{pharmacy} = $tds[5]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg;
+        }
         push @arr, \%hash;
     }
 

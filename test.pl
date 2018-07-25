@@ -6,7 +6,7 @@ use JSON;
 use open ':encoding(UTF-8)';
 use Data::Dumper;
 
-my $contents = do { local(@ARGV, $/) = 'raw/bazalekow/medicine/4244.html'; <> };
+my $contents = do { local(@ARGV, $/) = 'raw/bazalekow/medicine/5669.html'; <> };
 
 my %data = ();
 
@@ -36,8 +36,10 @@ foreach my $tr ($trs->each) {
         'manufacturer' => @tds[2]->text,
         'price' => @tds[3]->text,
         'price_after_refund' => @tds[4]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg,
-        'pharmacy' => @tds[5]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg
     );
+    if(@tds[5]) {
+        $hash{pharmacy} = $tds[5]->text =~ /[\r\n\s]+(.*)[\r\n\s]+/sg;
+    }
     push @arr, \%hash;
 }
 
