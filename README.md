@@ -2,7 +2,16 @@ Connect to database
 
     mongo mongodb://localhost:27017/real_estate
 
-Models
+Google Sheet:
+
+> https://docs.google.com/spreadsheets/d/1W2np3pzAJHz6jZ9cbraHVbzvvHGXoh_rtciKF8jyDJs/edit#gid=0
+    
+Google Docs   
+
+> https://docs.google.com/document/d/1PBSTty2xO5KtEttcAN4RelVjJzBpxky9VxbdiDbRmj0/edit
+
+
+# Models
 
 Basic OLX
 
