@@ -52,7 +52,7 @@ module.exports =
                             place: t.querySelector('small span').textContent.trim(),
                             date_txt: t.querySelector('small:nth-of-type(2) span').textContent.trim(),
                             price: t.querySelector('.price strong').innerHTML.trim(),
-                            img: t.querySelector('img').src,
+                            img: t.querySelector('img') ? t.querySelector('img').src : undefined,
                             id: "olx_" + t.querySelector('table').dataset.id
                         };
                         flat.date = moment(flat.date_txt, "D MMM").toDate();
@@ -145,7 +145,7 @@ module.exports =
                             rooms: props[7].trim(),
                             // finance: props[8].trim(),
                             description: div.querySelector('#textContent').textContent.trim(),
-                            img: document.querySelector("#photo-gallery-opener img").src
+                            img: document.querySelector("#photo-gallery-opener img") ? document.querySelector("#photo-gallery-opener img").src : undefined
                         };
 
                     } catch (e) {
