@@ -27,8 +27,8 @@ module.exports =
             return [
                 "https://www.olx.pl/nieruchomosci/mieszkania/sprzedaz/gdansk/?search%5Bfilter_float_price%3Afrom%5D=50000&search%5Bfilter_float_price%3Ato%5D=300000&search%5Bfilter_enum_market%5D%5B0%5D=secondary",
                 "https://gratka.pl/nieruchomosci/mieszkania/gdansk?cena-calkowita:min=5000&cena-calkowita:max=300000&cena-za-m2:max=7000&rynek=wtorny&lokalizacja_region=pomorskie&sort=activated_at:desc",
-                // "https://www.otodom.pl/sprzedaz/mieszkanie/gdansk/?search[filter_float_price%3Afrom]=50000&search[filter_float_price%3Ato]=300000&search[filter_float_price_per_m%3Ato]=7000&search[filter_enum_market][0]=secondary&search[description]=1&search[dist]=0&search[subregion_id]=439&search[city_id]=40",
-                // "https://dom.trojmiasto.pl/nieruchomosci-rynek-wtorny/ikl,101,e1i,95_37_97,ai,_30000,x1i,_7000.html"
+                "https://www.otodom.pl/sprzedaz/mieszkanie/gdansk/?search%5Bfilter_float_price%3Afrom%5D=50000&search%5Bfilter_float_price%3Ato%5D=300000&search%5Bfilter_float_price_per_m%3Ato%5D=7000&search%5Bfilter_enum_market%5D%5B0%5D=secondary&search%5Bdescription%5D=1&search%5Bdist%5D=0&search%5Bsubregion_id%5D=439&search%5Bcity_id%5D=40&search%5Border%5D=created_at_first%3Adesc",
+                "https://dom.trojmiasto.pl/nieruchomosci-rynek-wtorny/ikl,101,e1i,81_95_33_37_97_83_49_38_58_41_79_40_42_54_46_63_90_35_91_3_34_8_32_52_77_57_45_94_47_1_43_80_62_36_50_96_48_87_5_59_76_53_55_86_2_72_56_7_31,w,1,ai,50000_300000,x1i,_7000.html"
             ];
         }
 
@@ -105,11 +105,82 @@ module.exports =
                 },
                 // otodom
                 (content) => {
-                    return []
+                    const {document} = (new JSDOM(content)).window;
+
+                    const tr = document.querySelectorAll(".col-md-content article");
+
+                    const list = [];
+
+                    for(let i = 0; i < tr.length; i++) {
+
+                        const t = tr[i];
+                        const flat = {
+                            title: t.querySelector('h3 .offer-item-title').textContent,
+                            link: t.querySelector('a').protocol + "//" + t.querySelector('a').host + t.querySelector('a').pathname,
+                            host: t.querySelector('a').host,
+                            place: t.querySelector('h3+.text-nowrap').textContent.replace(/^Mieszkanie na sprzedaż: /,''),
+                            price: t.querySelector('.offer-item-price').textContent.trim(),
+                            surface: t.querySelector('.offer-item-area').textContent,
+                            price_per_surface: t.querySelector('.offer-item-price-per-m').textContent,
+                            rooms: t.querySelector('.offer-item-rooms').textContent,
+                            id: 'otodom_' + t.dataset.itemId,
+                            img: JSON.parse(t.querySelector('figure').dataset.quickGallery)[0].photo
+                        };
+
+                        list.push(flat);
+
+                    }
+
+                    return list;
                 },
                 // trojmiasto
                 (content) => {
-                    return []
+                    const {document} = (new JSDOM(content.toString("utf-8"))).window;
+
+                    const tr = document.querySelectorAll(".subcontent-body .ogl-item");
+
+                    const list = [];
+
+                    for(let i = 0; i < tr.length; i++) {
+
+                        const t = tr[i];
+
+                        const params = {};
+                        const lis = t.querySelectorAll('.ogl-params li');
+                        if(lis.length === 1) {
+                            params.surface = lis[0].textContent;
+                        } else if(lis.length === 3) {
+                            params.rooms = lis[0].textContent;
+                            params.surface = lis[1].textContent;
+                            params.level = lis[2].textContent;
+                        } else if(lis.length === 2) { // one case from 2018.09.16
+                            params.surface = lis[0].textContent;
+                            params.level = lis[1].textContent;
+                        } else if(lis.length === 0) { // one case from 2018.09.16
+                            // do nothing
+                        } else {
+                            console.log(i, lis.length, lis);
+                            throw new Error("Not recognized number of general parameters");
+                        }
+
+
+                        const flat = {
+                            title: t.querySelector('.text-wrap a').textContent,
+                            link: t.querySelector('.text-wrap a').protocol + "//" + t.querySelector('.text-wrap a').host + t.querySelector('.text-wrap a').pathname,
+                            host: t.querySelector('.text-wrap a').host,
+                            place: t.querySelector('.place').textContent.replace(/\n?\s+/g, ' ').trim(),
+                            price: t.querySelector('.prize strong').textContent.trim(),
+                            surface: t.querySelector('.ogl-params').textContent,
+                            price_per_surface: t.querySelector('.prize').textContent.match(/\((.*)\)/)[1].trim(),
+                            id: 'trojmiasto_' + t.dataset.id,
+                            img: t.querySelector('img').src
+                        };
+
+                        list.push(Object.assign(flat, params));
+
+                    }
+
+                    return list;
                 }
             ]
         }
@@ -187,14 +258,11 @@ module.exports =
                     let flat = {};
 
 
-                    // try {
-
-
                     flat = {
                         added_at: document.querySelector('.text-details .right p:first-of-type').textContent.replace('Data dodania: ', ''),
                         from: contact.querySelector('.box-contact-info-type') ? contact.querySelector('.box-contact-info-type').textContent : undefined,
                         price_per_surface: params.querySelector('.param_price').innerHTML.match(/\/span>\s*(.*)/)[1],
-                        level: params.querySelector('.param_floor_no').textContent.trim(),
+                        level: params.querySelector('.param_floor_no') ? params.querySelector('.param_floor_no').textContent.trim() : undefined,
                         furnishings: null,
                         market: undefined,
                         type_of_building: undefined,
@@ -205,12 +273,7 @@ module.exports =
                         user_link: undefined,
                         user_since: undefined
                     };
-                    // } catch (e) {
-                    //     console.log(String(content));
-                    //     console.log(e);
-                    //     process.exit();
-                    //
-                    // }
+
 
                     return flat;
                 },
@@ -218,8 +281,17 @@ module.exports =
                 (
                     content
                 ) => {
-                    return {}
+                    const {document} = (new JSDOM(content.toString("utf-8"))).window;
+
+                    let flat = {};
+
+                    flat = Object.assign(flat, {
+                        description: document.querySelector('#dynamic-data .ogl-description').textContent.trim()
+                    });
+
+                    return flat;
                 }
+
             ]
         }
 

@@ -18,6 +18,7 @@
 
        // send smses
 
+require('dotenv').load();
 
 const Config = require("./src/config");
 const Scraper = require("./src/scraper");
@@ -38,7 +39,8 @@ let index = 0;
 
 // Connection URL
 const mongoUri = 'mongodb://localhost:27017';
-Docs.authorize(JSON.parse(fs.readFileSync('./credentials.json')), () => {});
+const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS;
+Docs.authorize(JSON.parse(GOOGLE_CREDENTIALS), () => {});
 
 (async function() {
     try {
@@ -49,16 +51,13 @@ Docs.authorize(JSON.parse(fs.readFileSync('./credentials.json')), () => {});
         // ... anything
 
         console.log("Connected successfully to database");
+        console.log("NODE ENV", process.env.NODE_ENV);
 
         while (!error) {
-
-            // console.log("ok ", index);
 
             for(let s=0; s<services.length; s++) {
 
                 const list = await Scraper.getAndProcess(services[s].url, services[s].fileList, services[s].modelList);
-
-                // console.log(services[s].name, list);
 
                 await manager.syncList(list);
 
@@ -66,24 +65,18 @@ Docs.authorize(JSON.parse(fs.readFileSync('./credentials.json')), () => {});
 
                     const additional = await Scraper.getAndProcess(list[l].link, services[s].fileSingle(list[l]), Helper.selectModel(list[l]));
 
-
-
                     Object.assign( list[l], additional );
 
                     console.log("ok", list[l].host, list[l].id, list[l].title);
                     await manager.syncOffer(list[l]);
 
-                    // break
                 }
 
             }
 
-
-
-            if(index >= 100) { break; }
             index++;
             await Scraper.unlinkListFiles();
-            console.log("INDEX: ", index);
+            console.log("INDEX: ", index, "Time: ", new Date());
             sleep.msleep(400000);
         }
 

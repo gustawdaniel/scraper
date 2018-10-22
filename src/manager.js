@@ -1,6 +1,8 @@
 const Docs = require('./docs');
 const Config = require('./config');
 const Helper = require('./helper');
+const Mailer = require('./mailer');
+const Sms = require('./sms');
 
 module.exports =
 
@@ -21,17 +23,17 @@ module.exports =
             const savedOffer = await Offers.findOne({link: offer.link});
             offer = Object.assign(offer, savedOffer);
 
-            // console.log("ADD", offer);
-
-            // process.exit();
-
             if(!Helper.equalObjects(offer, savedOffer)) {
-
-                // console.log(JSON.stringify(offer));
-                // console.log(JSON.stringify(savedOffer));
 
                 Offers.update({_id: offer._id}, offer);
                 Docs.saveOffer(offer);
+
+                if(Sms.shouldSend(offer)) {
+                    Sms.send(offer)
+                } else {
+                    Mailer.send(offer);
+                }
+
             }
 
 
@@ -52,7 +54,7 @@ module.exports =
 
                     const line = 2 + await Offers.countDocuments();
                     Offers.insert(
-                        Object.assign(list[i], {line})
+                        Object.assign(list[i], {line, created_at: new Date()})
                     );
                     Docs.saveOffer(list[i]);
                 }

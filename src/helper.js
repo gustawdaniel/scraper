@@ -39,6 +39,9 @@ module.exports =
                 case "gratka.pl": {
                     return Config.getModelsSingle()[1] // gratka is second service
                 }
+                case "dom.trojmiasto.pl": {
+                    return Config.getModelsSingle()[3] // trojmiasto is forth service
+                }
                 default: {
                     return (content) => { return {}; } // by default model is undefined
                 }

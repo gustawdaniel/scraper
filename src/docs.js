@@ -1,5 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
+const colors = require('colors');
 const {google} = require('googleapis');
 
 // If modifying these scopes, delete credentials.json.
@@ -8,7 +9,7 @@ const SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets'
 ];
 const TOKEN_PATH = 'token.json';
-const SPREAD_SHEET_ID = '1W2np3pzAJHz6jZ9cbraHVbzvvHGXoh_rtciKF8jyDJs';
+const SPREAD_SHEET_ID = process.env.SPREAD_SHEET_ID;
 
 module.exports =
 
@@ -25,12 +26,8 @@ module.exports =
             const oAuth2Client = new google.auth.OAuth2(
                 client_id, client_secret, redirect_uris[0]);
 
-            // Check if we have previously stored a token.
-            fs.readFile(TOKEN_PATH, (err, token) => {
-                if (err) return getNewToken(oAuth2Client, callback);
-                oAuth2Client.setCredentials(JSON.parse(token));
-                callback(oAuth2Client);
-            });
+            oAuth2Client.setCredentials(JSON.parse(process.env.GOOGLE_TOKEN));
+            callback(oAuth2Client);
         }
 
         static writeLine(values, range) {
@@ -51,14 +48,30 @@ module.exports =
                 throw new Error("Offer should have 'line' property");
             }
 
-            console.log("-------------- OFF START -------------");
-            console.log(offer);
-            console.log("-------------- OFF FINAL -------------");
-            console.log("-------------- VAL START -------------");
-            console.log(this.arraifyOffer(offer));
-            console.log("-------------- VAL FINAL -------------");
+            // console.log("-------------- OFF START -------------");
+            // console.log(offer);
+            // console.log("-------------- OFF FINAL -------------");
+            // console.log("-------------- VAL START -------------");
+            // console.log(this.arraifyOffer(offer));
+            // console.log("-------------- VAL FINAL -------------");
             this.writeLine(this.arraifyOffer(offer), `A${offer.line}`);
         }
+
+        static get fieldsToArraify() {
+            return [
+                'title',
+                'place',
+                'price',
+                'surface',
+                'price_per_surface',
+                'rooms',
+                'description',
+                'img',
+                'host',
+                'link',
+                'created_at'
+            ]
+        };
 
         /**
          *
@@ -72,67 +85,15 @@ module.exports =
             if(offer.hasOwnProperty('description')) {
                 offer.description = offer.description.replace(/\n/g, " ");
             }
-            // return Object.values(offer).map(s => String(s))
-            return [
-                offer.title,
-                offer.link,
-                offer.host,
-                offer.place,
-                offer.date_txt,
-                offer.price,
-                offer.img,
-                offer.id,
-                offer.date,
-                offer.added,
-                offer.from,
-                offer.price_per_surface,
-                offer.level,
-                offer.furnishings,
-                offer.market,
-                offer.type_of_building,
-                offer.surface,
-                offer.rooms,
-                offer.description,
-                offer.user_name,
-                offer.user_link,
-                offer.user_since,
-                offer._id,
-                offer.line,
-            ].map(s => String(s))
+
+            return this.fieldsToArraify.map(field => offer[field]).map(s => String(s))
+        }
+
+        static get SPREAD_SHEET_ID() {
+            return SPREAD_SHEET_ID;
         }
 
     };
-
-/**
- * Get and store new token after prompting for user authorization, and then
- * execute the given callback with the authorized OAuth2 client.
- * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback for the authorized client.
- */
-function getNewToken(oAuth2Client, callback) {
-    const authUrl = oAuth2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: SCOPES,
-    });
-    console.log('Authorize this app by visiting this url:', authUrl);
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
-    rl.question('Enter the code from that page here: ', (code) => {
-        rl.close();
-        oAuth2Client.getToken(code, (err, token) => {
-            if (err) return callback(err);
-            oAuth2Client.setCredentials(token);
-            // Store the token to disk for later program executions
-            fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-                if (err) console.error(err);
-                console.log('Token stored to', TOKEN_PATH);
-            });
-            callback(oAuth2Client);
-        });
-    });
-}
 
 /**
  * Prints the names and majors of students in a sample spreadsheet:
@@ -143,7 +104,6 @@ function listMajors(auth) {
     const sheets = google.sheets({version: 'v4', auth});
     sheets.spreadsheets.values.get({
         spreadsheetId: SPREAD_SHEET_ID, // my
-        // spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms', // sample
         range: 'A2:E',
     }, (err, res) => {
         if (err) return console.log('The API returned an error: ' + err);
@@ -165,26 +125,40 @@ function writeConfigurableValues(externalValues, range) { // ['Alina'], 'E4'
     return (auth) => {
         const sheets = google.sheets({version: 'v4', auth});
 
-        var values = [
-            externalValues
-        ];
-        var body = {
-            values: values
-        };
-        sheets.spreadsheets.values.update({
+        const values = [ externalValues ];
+        const body = { values: values };
+        const params = {
             spreadsheetId: SPREAD_SHEET_ID,
             range,
             valueInputOption: 'USER_ENTERED',
             resource: body
-        })
-        // .then((response) => {
-        // if (err===0) {
-        //     console.log(err);
-        // } else {
-        //     var result = response.result;
-        //     console.log(`${result.updatedCells} cells updated.`);
-        // }
-        // });
+        };
+
+        const callback = function(err, response) {
+
+            if (err) {
+                console.error("SYNC ERR".red, range, err.response.status);
+
+                if(err.response.status === 429) {
+
+                    setTimeout(() => {
+                        console.log("SYNC CALL".blue, params.range);
+                        sheets.spreadsheets.values.update(params, callback);
+                    }, 10000);
+                } else {
+                    console.log("--- ERROR START ---".red);
+                    console.log("params", params);
+                    console.log("error", err);
+                    console.log("---  ERROR END  ---".red);
+                }
+
+            } else {
+                console.info("SYNC RES".green, range, response.status);
+            }
+
+        };
+
+        sheets.spreadsheets.values.update(params, callback);
 
     }
 

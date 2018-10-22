@@ -1,5 +1,6 @@
 const fs = require('fs');
 const axios = require('axios');
+const Config = require("./config");
 
 module.exports =
 
@@ -39,11 +40,11 @@ class Scraper {
         return data;
     }
 
-    // TODO: tutaj dokończyć
     static async unlinkListFiles() {
         try {
-            fs.unlinkSync('raw/olx.html');
-            fs.unlinkSync('raw/gratka.html');
+            Config.name().forEach(name => {
+                fs.unlinkSync(`raw/${name}.html`);
+            });
             console.log('successfully deleted list files');
         } catch (err) {
             // handle the error
